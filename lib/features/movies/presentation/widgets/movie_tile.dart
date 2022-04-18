@@ -1,0 +1,96 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+
+// Constants
+import '../../../../constants/constants.dart';
+
+// Models
+import '../../models/models.dart';
+import 'rating_box.dart';
+
+class MovieTile extends StatelessWidget {
+  const MovieTile({
+    Key? key,
+    required this.movie,
+    this.withTitle = true,
+    this.horizontalMargin = 0,
+    this.verticalMargin = 0,
+  }) : super(key: key);
+
+  final Movie movie;
+  final double horizontalMargin;
+  final double verticalMargin;
+  final bool withTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(kAppBorderRadius),
+          child: Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: horizontalMargin,
+              vertical: verticalMargin,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(kAppBorderRadius),
+              image: DecorationImage(
+                image: movie.getMoviePoster,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+        if (withTitle)
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(kAppBorderRadius),
+                bottomRight: Radius.circular(kAppBorderRadius),
+              ),
+              child: LimitedBox(
+                maxHeight: 60,
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: movie.getMoviePoster,
+                        fit: BoxFit.cover,
+                        alignment: Alignment.bottomCenter),
+                  ),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 10,
+                      sigmaY: 10,
+                    ),
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      alignment: Alignment.center,
+                      color: Colors.white.withOpacity(0),
+                      height: 40,
+                      child: Text(
+                        movie.title,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        Positioned(
+          right: 10,
+          top: 10,
+          child: RatingBox(
+            rating: movie.rating,
+          ),
+        )
+      ],
+    );
+  }
+}
