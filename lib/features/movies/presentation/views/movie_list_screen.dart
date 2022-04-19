@@ -57,65 +57,62 @@ class MovieListScreen extends ConsumerWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: movies.isEmpty
-          ? const Center(
-              child: CircularProgressIndicator(
-              backgroundColor: Colors.white,
-            ))
-          : NotificationListener(
-            onNotification: (notification) {
-              if (notification is ScrollEndNotification) {
-                final before = notification.metrics.extentBefore;
-                final max = notification.metrics.maxScrollExtent;
-                if (before == max) {
-                  ref.watch(movieListControllerProvider(args).notifier).getMovies();
-                  return true;
-                }
-                return false;
-              }
-              return false;
-            },
-            child: Stack(
-              children: [
-                Container(
-                  width: _size.width,
-                  height: _size.height,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: movies[0].getMoviePoster,
-                        fit: BoxFit.cover),
-                  ),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                    child: Container(
-                      color: Colors.white.withOpacity(0),
+        appBar: AppBar(title: Text(title)),
+        body: movies.isEmpty
+            ? const Center(
+                child: CircularProgressIndicator(
+                backgroundColor: Colors.white,
+              ))
+            : NotificationListener<ScrollEndNotification>(
+                onNotification: (notification) {
+                  final before = notification.metrics.extentBefore;
+                  final max = notification.metrics.maxScrollExtent;
+                  if (before == max) {
+                    ref
+                        .watch(movieListControllerProvider(args).notifier)
+                        .getMovies();
+                    return true;
+                  }
+                  return false;
+                },
+                child: Stack(
+                  children: [
+                    Container(
+                      width: _size.width,
+                      height: _size.height,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: movies[0].getMoviePoster, fit: BoxFit.cover),
+                      ),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                        child: Container(
+                          color: Colors.white.withOpacity(0),
+                        ),
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: GridView.builder(
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed('movie-detail',
+                                arguments: movies[index].id);
+                          },
+                          child: MovieTile(movie: movies[index]),
+                        ),
+                        itemCount: movies.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                          childAspectRatio: 2 / 3,
+                          maxCrossAxisExtent: 200,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: GridView.builder(
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                         Navigator.of(context)
-                          .pushNamed('movie-detail', arguments: movies[index].id);
-                      },
-                      child: MovieTile(movie: movies[index]),
-                    ),
-                    itemCount: movies.length,
-                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      childAspectRatio: 2 / 3,
-                      maxCrossAxisExtent: 200,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
-    );
-    
+              ));
   }
 }
