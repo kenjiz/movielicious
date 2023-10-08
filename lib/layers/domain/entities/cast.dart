@@ -25,4 +25,7 @@ class Cast extends Equatable {
       order,
     ];
   }
+
+  @override
+  bool get stringify => true;
 }

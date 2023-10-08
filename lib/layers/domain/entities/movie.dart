@@ -37,4 +37,7 @@ class Movie extends Equatable {
       isAdult,
     ];
   }
+
+  @override
+  bool get stringify => true;
 }

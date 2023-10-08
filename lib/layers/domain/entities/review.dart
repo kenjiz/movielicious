@@ -20,4 +20,7 @@ class Review extends Equatable {
         content,
         createdAt,
       ];
+
+  @override
+  bool get stringify => true;
 }

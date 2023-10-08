@@ -11,4 +11,7 @@ class Genre extends Equatable {
 
   @override
   List<Object> get props => [id, name];
+
+  @override
+  bool get stringify => true;
 }
