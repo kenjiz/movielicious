@@ -4,7 +4,7 @@ import '../../domain/repositories/movie_repositories.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   @override
-  CastListOrFailure getCasts() {
+  CreditListOrFailure getCredits() {
     // TODO: implement getCasts
     throw UnimplementedError();
   }

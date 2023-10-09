@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import '../../domain/entities/movie.dart';
 
 class MovieModel extends Movie {

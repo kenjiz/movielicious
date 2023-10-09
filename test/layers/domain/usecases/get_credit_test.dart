@@ -1,32 +1,32 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:movielicious/layers/domain/entities/cast.dart';
+import 'package:movielicious/layers/domain/entities/credit.dart';
 import 'package:movielicious/layers/domain/repositories/movie_repositories.dart';
-import 'package:movielicious/layers/domain/usecases/get_casts.dart';
+import 'package:movielicious/layers/domain/usecases/get_credits.dart';
 
 class MockMovieRepository extends Mock implements MovieRepository {}
 
 void main() {
-  late GetCasts useCase;
+  late GetCredits useCase;
   late MockMovieRepository mockMovieRepository;
 
   setUp(() {
     mockMovieRepository = MockMovieRepository();
-    useCase = GetCasts(repository: mockMovieRepository);
+    useCase = GetCredits(repository: mockMovieRepository);
   });
 
-  const tCast = Cast(
+  const tCast = Credit(
     id: '1',
     name: 'name',
-    imagePath: 'imagePath',
+    profilePath: 'imagePath',
     character: 'character',
     order: 1,
   );
 
   test('should get List of [Cast] from MovieRepository', () async {
     // Arrange
-    when(() => mockMovieRepository.getCasts())
+    when(() => mockMovieRepository.getCredits())
         .thenAnswer((_) async => const Right([tCast]));
 
     // Act
@@ -34,7 +34,7 @@ void main() {
 
     // Assert
     expect(result, equals(const Right([tCast])));
-    verify(() => mockMovieRepository.getCasts()).called(1);
+    verify(() => mockMovieRepository.getCredits()).called(1);
     verifyNoMoreInteractions(mockMovieRepository);
   });
 }

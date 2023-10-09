@@ -1,16 +1,16 @@
 import 'package:equatable/equatable.dart';
 
-class Cast extends Equatable {
+class Credit extends Equatable {
   final String id;
   final String name;
-  final String imagePath;
+  final String profilePath;
   final String character;
   final int order;
 
-  const Cast({
+  const Credit({
     required this.id,
     required this.name,
-    required this.imagePath,
+    required this.profilePath,
     required this.character,
     required this.order,
   });
@@ -20,7 +20,7 @@ class Cast extends Equatable {
     return [
       id,
       name,
-      imagePath,
+      profilePath,
       character,
       order,
     ];
