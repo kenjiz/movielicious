@@ -20,6 +20,8 @@ void main() {
     Review(
       id: 'id',
       author: 'author',
+      avatarPath: 'avatar_path.jpg',
+      rating: '1',
       content: 'content',
       createdAt: 'createdAt',
     ),

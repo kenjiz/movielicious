@@ -28,13 +28,14 @@ void main() {
       // Arrange
 
       // decode json file
-      final Map<String, dynamic> dataMap = json.decode(fixture('movie.json'));
+      final Map<String, dynamic> extractedMap =
+          json.decode(fixture('movie.json'));
 
-      // get only the first index
-      final Map<String, dynamic> data = (dataMap['results'] as List).first;
+      // get only the first index from result
+      final testMap = (extractedMap['results'] as List).first;
 
       // Act
-      final MovieModel result = MovieModel.fromMap(data);
+      final result = MovieModel.fromMap(testMap);
 
       // Assert
       expect(result, equals(tMovieModel));
@@ -53,7 +54,7 @@ void main() {
       'vote_average': 1.1,
       'adult': false,
     };
-    test('should return a proper map of [MovieModel].', () async {
+    test('should return a proper map from [MovieModel].', () async {
       // Arrange
 
       // Act
