@@ -17,7 +17,7 @@ void main() {
   });
 
   setUpAll(() {
-    registerFallbackValue('searchTerm');
+    registerFallbackValue(const MovieParams(searchTerm: 'searchTerm'));
   });
 
   const tMovieList = [
@@ -34,23 +34,21 @@ void main() {
     ),
   ];
 
-  const tSearchTerm = 'search term';
+  const tSearchParams = MovieParams(searchTerm: 'searchTerm');
 
   test(
       'should get List of [Movies] from MovieRepository when search has a result',
       () async {
     // Arrange
-    when(() => mockMovieRepository.searchMovie(
-            searchTerm: any(named: 'searchTerm')))
+    when(() => mockMovieRepository.searchMovie(any()))
         .thenAnswer((_) async => const Right(tMovieList));
 
     // Act
-    final result = await useCase(tSearchTerm);
+    final result = await useCase(tSearchParams);
 
     // Assert
     expect(result, equals(const Right(tMovieList)));
-    verify(() => mockMovieRepository.searchMovie(searchTerm: tSearchTerm))
-        .called(1);
+    verify(() => mockMovieRepository.searchMovie(tSearchParams)).called(1);
     verifyNoMoreInteractions(mockMovieRepository);
   });
 }

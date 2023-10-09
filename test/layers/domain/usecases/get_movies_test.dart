@@ -18,10 +18,10 @@ void main() {
   });
 
   setUpAll(() {
-    registerFallbackValue(MovieCategory.popular);
+    registerFallbackValue(const MovieParams(category: MovieCategory.popular));
   });
 
-  const tParamsPopular = MovieCategory.popular;
+  const tPopularParams = MovieParams(category: MovieCategory.popular);
   const tMovie = Movie(
     id: '1',
     genreIds: ['1', '2', '3'],
@@ -36,16 +36,15 @@ void main() {
 
   test('should get List of [Movie] from MovieRepository', () async {
     // Arrange
-    when(() => mockMovieRepository.getMovies(category: any(named: 'category')))
+    when(() => mockMovieRepository.getMovies(any()))
         .thenAnswer((_) async => const Right([tMovie]));
 
     // Act
-    final result = await useCase(tParamsPopular);
+    final result = await useCase(tPopularParams);
 
     // Assert
     expect(result, equals(const Right([tMovie])));
-    verify(() => mockMovieRepository.getMovies(category: tParamsPopular))
-        .called(1);
+    verify(() => mockMovieRepository.getMovies(tPopularParams)).called(1);
     verifyNoMoreInteractions(mockMovieRepository);
   });
 }

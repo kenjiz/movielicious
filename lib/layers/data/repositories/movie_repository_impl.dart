@@ -1,11 +1,15 @@
-import 'package:movielicious/core/enums/movie_category.dart';
-
 import '../../domain/repositories/movie_repositories.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   @override
-  CreditListOrFailure getCredits() {
-    // TODO: implement getCasts
+  MovieListOrFailure getMovies(MovieParams params) {
+    // TODO: implement getMovies
+    throw UnimplementedError();
+  }
+
+  @override
+  MovieListOrFailure searchMovie(MovieParams params) {
+    // TODO: implement searchMovie
     throw UnimplementedError();
   }
 
@@ -16,20 +20,14 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
-  MovieListOrFailure getMovies({required MovieCategory category}) {
-    // TODO: implement getMovies
+  CreditListOrFailure getCredits() {
+    // TODO: implement getCredits
     throw UnimplementedError();
   }
 
   @override
   ReviewListOrFailure getReviews() {
     // TODO: implement getReviews
-    throw UnimplementedError();
-  }
-
-  @override
-  MovieListOrFailure searchMovie({required String searchTerm}) {
-    // TODO: implement searchMovie
     throw UnimplementedError();
   }
 }

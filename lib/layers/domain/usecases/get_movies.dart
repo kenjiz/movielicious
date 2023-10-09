@@ -1,15 +1,14 @@
 import '../repositories/movie_repositories.dart';
 import '../entities/movie.dart';
-import '../../../core/enums/movie_category.dart';
 import '../../../core/usecases/usecases.dart';
 
-class GetMovies implements UseCaseWithParams<List<Movie>, MovieCategory> {
+class GetMovies implements UseCaseWithParams<List<Movie>, MovieParams> {
   final MovieRepository repository;
 
   const GetMovies({required this.repository});
 
   @override
-  MovieListOrFailure call(MovieCategory params) async {
-    return await repository.getMovies(category: params);
+  MovieListOrFailure call(MovieParams params) async {
+    return await repository.getMovies(params);
   }
 }
