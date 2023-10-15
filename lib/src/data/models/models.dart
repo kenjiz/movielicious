@@ -1,0 +1,11 @@
+export 'credit_model.dart';
+export 'movie_model.dart';
+export 'review_model.dart';
+export 'genre_model.dart';
+export 'request/movie_queries_model.dart';
+export 'request/review_queries_model.dart';
+export 'request/search_queries_model.dart';
+export 'responses/credit_response.dart';
+export 'responses/genre_response.dart';
+export 'responses/movie_response.dart';
+export 'responses/review_response.dart';

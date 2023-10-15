@@ -1,5 +1,4 @@
-import '../entities/movie.dart';
-import '../entities/queries/search_queries.dart';
+import '../entities/entities.dart';
 import '../repositories/movie_repositories.dart';
 import '../../core/usecases/usecases.dart';
 

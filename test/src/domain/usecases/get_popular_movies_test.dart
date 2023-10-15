@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:movielicious/src/core/enums/list_category.dart';
+import 'package:movielicious/src/data/models/request/movie_queries_model.dart';
 import 'package:movielicious/src/domain/entities/movie.dart';
-import 'package:movielicious/src/domain/entities/queries/movie_queries.dart';
 import 'package:movielicious/src/domain/repositories/movie_repositories.dart';
 import 'package:movielicious/src/domain/usecases/get_popular_movies.dart';
 
@@ -18,7 +18,7 @@ void main() {
     useCase = GetPopularMovies(repository: mockMovieRepository);
   });
 
-  const tMovieRequest = MovieQueries();
+  const tMovieRequest = MovieQueriesModel();
   const tMovieCategory = ListCategory.popular;
 
   setUpAll(() {

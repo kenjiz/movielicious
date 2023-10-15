@@ -1,13 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:movielicious/src/domain/entities/queries/movie_queries.dart';
-import 'package:movielicious/src/domain/entities/queries/search_queries.dart';
 
 import '../../core/enums/list_category.dart';
 import '../../core/errors/failures.dart';
-import '../entities/credit.dart';
-import '../entities/genre.dart';
-import '../entities/movie.dart';
-import '../entities/review.dart';
+import '../entities/entities.dart';
 
 typedef MovieListOrFailure = Future<Either<Failure, List<Movie>>>;
 typedef GenreListOrFailure = Future<Either<Failure, List<Genre>>>;

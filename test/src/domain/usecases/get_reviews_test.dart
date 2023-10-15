@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:movielicious/src/domain/entities/queries/review_queries.dart';
+import 'package:movielicious/src/data/models/request/review_queries_model.dart';
 import 'package:movielicious/src/domain/entities/review.dart';
 import 'package:movielicious/src/domain/repositories/movie_repositories.dart';
 import 'package:movielicious/src/domain/usecases/get_reviews.dart';
@@ -39,7 +39,7 @@ void main() {
         .thenAnswer((_) async => const Right(tReviewList));
 
     // Act
-    final result = await useCase(const ReviewQueries(movieId: tMovieId));
+    final result = await useCase(const ReviewQueriesModel(movieId: tMovieId));
 
     // Assert
     expect(result, equals(const Right(tReviewList)));

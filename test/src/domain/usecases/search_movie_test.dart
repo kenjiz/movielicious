@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:movielicious/src/data/models/request/search_queries_model.dart';
 import 'package:movielicious/src/domain/entities/movie.dart';
-import 'package:movielicious/src/domain/entities/queries/search_queries.dart';
 import 'package:movielicious/src/domain/repositories/movie_repositories.dart';
 import 'package:movielicious/src/domain/usecases/search_movie.dart';
 
@@ -30,7 +30,7 @@ void main() {
       isAdult: false,
     ),
   ];
-  const tSearchRequest = SearchQueries(searchTerm: 'searchTerm');
+  const tSearchRequest = SearchQueriesModel(searchTerm: 'searchTerm');
 
   setUpAll(() {
     registerFallbackValue(tSearchRequest);

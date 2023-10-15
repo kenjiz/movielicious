@@ -1,10 +1,4 @@
-import 'package:movielicious/src/data/models/responses/credit_response.dart';
-import 'package:movielicious/src/data/models/responses/genre_response.dart';
-import 'package:movielicious/src/data/models/responses/review_response.dart';
-import 'package:movielicious/src/domain/entities/queries/search_queries.dart';
-
-import '../../../domain/entities/queries/movie_queries.dart';
-import '../../models/responses/movie_response.dart';
+import '../../models/models.dart';
 import '../service/movie_service.dart';
 import 'movie_remote_data_source.dart';
 
@@ -18,7 +12,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   @override
   Future<MovieResponseModel> getMovies(
     String category, {
-    required MovieQueries queries,
+    required MovieQueriesModel queries,
   }) async {
     return await service.getMovies(category, queries: queries);
   }
@@ -34,12 +28,15 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   }
 
   @override
-  Future<MovieResponseModel> searchMovie(SearchQueries queries) async {
+  Future<MovieResponseModel> searchMovie(SearchQueriesModel queries) async {
     return await service.searchMovie(queries: queries);
   }
 
   @override
-  Future<ReviewResponseModel> getReviews(int movieId) async {
-    return await service.getReviews(movieId);
+  Future<ReviewResponseModel> getReviews(
+    int movieId,
+    ReviewQueriesModel queries,
+  ) async {
+    return await service.getReviews(movieId, queries: queries);
   }
 }
