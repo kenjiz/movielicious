@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../core/constants/http_constants.dart';
-import '../../../domain/entities/queries/movie_queries.dart';
-import '../../../domain/entities/queries/search_queries.dart';
+import '../../../domain/entities/requests/movie_queries.dart';
+import '../../../domain/entities/requests/search_queries.dart';
 import '../../models/models.dart';
 
 part 'movie_service.g.dart';

@@ -1,4 +1,4 @@
-import '../../../domain/entities/queries/movie_queries.dart';
+import '../../../domain/entities/requests/movie_queries.dart';
 
 class MovieQueriesModel extends MovieQueries {
   const MovieQueriesModel({super.page, super.language});

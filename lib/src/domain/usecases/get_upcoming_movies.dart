@@ -4,13 +4,13 @@ import '../entities/entities.dart';
 import '../repositories/movie_repositories.dart';
 
 class GetUpcomingMovies
-    implements UseCaseWithParams<List<Movie>, MovieQueries> {
+    implements UseCaseWithParams<MovieResponse, MovieQueries> {
   final MovieRepository repository;
 
   const GetUpcomingMovies({required this.repository});
 
   @override
-  MovieListOrFailure call(MovieQueries queries) async {
+  FailureOrMovieResponse call(MovieQueries queries) async {
     return await repository.getMovies(
       ListCategory.upcoming,
       requestQuery: queries,

@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:movielicious/src/data/models/request/review_queries_model.dart';
-import 'package:movielicious/src/domain/entities/review.dart';
+import 'package:movielicious/src/data/models/models.dart';
 import 'package:movielicious/src/domain/repositories/movie_repositories.dart';
 import 'package:movielicious/src/domain/usecases/get_reviews.dart';
 
@@ -17,33 +16,46 @@ void main() {
     useCase = GetReviews(repository: mockMovieRepository);
   });
 
-  const tReviewList = [
-    Review(
-      id: 'id',
-      authorDetails: AuthorDetails(
+  setUpAll(() {
+    registerFallbackValue(const ReviewQueriesModel());
+  });
+
+  const tModel = ReviewModel(
+    id: '1',
+    author: 'author',
+    authorDetails: AuthorDetailsModel(
         name: 'name',
         username: 'username',
-        avatarPath: 'avatarPath',
-        rating: 1,
-      ),
-      author: 'author',
-      content: 'content',
-      createdAt: 'createdAt',
-    ),
-  ];
+        avatarPath: 'avatar_path.jpg',
+        rating: 1),
+    content: 'content',
+    createdAt: 'created_at',
+  );
+
+  const tResponseModel = ReviewResponseModel(
+    page: 1,
+    results: [tModel],
+    totalPages: 1,
+    totalResults: 1,
+  );
+
+  const tQueries = ReviewQueriesModel();
+
   const tMovieId = 1;
 
   test('should get List of [Review] from MovieRepository', () async {
     // Arrange
-    when(() => mockMovieRepository.getReviews(movieId: any(named: 'movieId')))
-        .thenAnswer((_) async => const Right(tReviewList));
+    when(() => mockMovieRepository.getReviews(any(),
+            queries: any(named: 'queries')))
+        .thenAnswer((_) async => const Right(tResponseModel));
 
     // Act
-    final result = await useCase(const ReviewQueriesModel(movieId: tMovieId));
+    final result = await useCase(tMovieId, tQueries);
 
     // Assert
-    expect(result, equals(const Right(tReviewList)));
-    verify(() => mockMovieRepository.getReviews(movieId: tMovieId)).called(1);
+    expect(result, equals(const Right(tResponseModel)));
+    verify(() => mockMovieRepository.getReviews(tMovieId, queries: tQueries))
+        .called(1);
     verifyNoMoreInteractions(mockMovieRepository);
   });
 }

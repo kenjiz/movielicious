@@ -1,8 +1,8 @@
-import '../entities/genre.dart';
-import '../repositories/movie_repositories.dart';
 import '../../core/usecases/usecases.dart';
+import '../entities/entities.dart';
+import '../repositories/movie_repositories.dart';
 
-class GetGenres implements UseCase<List<Genre>> {
+class GetGenres implements UseCase<GenreResponse> {
   final MovieRepository repository;
 
   const GetGenres({
@@ -10,7 +10,7 @@ class GetGenres implements UseCase<List<Genre>> {
   });
 
   @override
-  GenreListOrFailure call() async {
+  FailureOrGenreResponse call() async {
     return await repository.getGenres();
   }
 }

@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:movielicious/src/data/models/request/search_queries_model.dart';
-import 'package:movielicious/src/domain/entities/movie.dart';
+import 'package:movielicious/src/data/models/models.dart';
 import 'package:movielicious/src/domain/repositories/movie_repositories.dart';
 import 'package:movielicious/src/domain/usecases/search_movie.dart';
 
@@ -17,24 +16,29 @@ void main() {
     useCase = SearchMovie(repository: mockMovieRepository);
   });
 
-  const tMovieList = [
-    Movie(
-      id: 1,
-      genreIds: [1, 2, 3],
-      backdropPath: 'backdrop.path',
-      posterPath: 'poster.path',
-      title: 'Test Movie',
-      overview: 'Test Overview',
-      releaseDate: 'release date',
-      voteAverage: '5',
-      isAdult: false,
-    ),
-  ];
+  const tMovie = MovieModel(
+    id: 1,
+    genreIds: [1, 2],
+    backdropPath: 'backdrop.jpg',
+    posterPath: 'posterpath.jpg',
+    title: 'title',
+    overview: 'overview',
+    releaseDate: '2023-01-01',
+    voteAverage: '1.1',
+    isAdult: false,
+  );
+
+  const tResponseModel = MovieResponseModel(
+    page: 1,
+    results: [tMovie],
+    totalPages: 1,
+    totalResults: 1,
+  );
+
   const tSearchRequest = SearchQueriesModel(searchTerm: 'searchTerm');
 
   setUpAll(() {
     registerFallbackValue(tSearchRequest);
-    registerFallbackValue(tMovieList);
   });
 
   test(
@@ -42,13 +46,13 @@ void main() {
       () async {
     // Arrange
     when(() => mockMovieRepository.searchMovie(any()))
-        .thenAnswer((_) async => const Right(tMovieList));
+        .thenAnswer((_) async => const Right(tResponseModel));
 
     // Act
     final result = await useCase(tSearchRequest);
 
     // Assert
-    expect(result, equals(const Right(tMovieList)));
+    expect(result, equals(const Right(tResponseModel)));
     verify(() => mockMovieRepository.searchMovie(tSearchRequest)).called(1);
     verifyNoMoreInteractions(mockMovieRepository);
   });

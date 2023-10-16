@@ -1,19 +1,12 @@
-import 'package:equatable/equatable.dart';
-
 import '../../../data/models/genre_model.dart';
+import '../../../domain/entities/responses/genre_response.dart';
 
-class GenreResponseModel extends Equatable {
-  final List<GenreModel> genres;
-  const GenreResponseModel({
-    required this.genres,
-  });
-
-  @override
-  List<Object> get props => [genres];
+class GenreResponseModel extends GenreResponse {
+  const GenreResponseModel({required super.genres});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'genres': genres.map((x) => x.toMap()).toList(),
+      'genres': genres.map((x) => (x as GenreModel).toMap()).toList(),
     };
   }
 
@@ -26,7 +19,4 @@ class GenreResponseModel extends Equatable {
       ),
     );
   }
-
-  @override
-  bool get stringify => true;
 }

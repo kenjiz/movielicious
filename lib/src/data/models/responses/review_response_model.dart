@@ -1,24 +1,18 @@
-import 'package:equatable/equatable.dart';
+import '../../../domain/entities/responses/review_response.dart';
+import '../review_model.dart';
 
-import 'package:movielicious/src/data/models/review_model.dart';
-
-class ReviewResponseModel extends Equatable {
-  final int? page;
-  final List<ReviewModel> results;
-  final int totalPages;
-  final int totalResults;
-
+class ReviewResponseModel extends ReviewResponse {
   const ReviewResponseModel({
-    this.page,
-    required this.results,
-    required this.totalPages,
-    required this.totalResults,
+    required super.page,
+    required super.results,
+    required super.totalPages,
+    required super.totalResults,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'page': page,
-      'results': results.map((x) => x.toMap()).toList(),
+      'results': results.map((x) => (x as ReviewModel).toMap()).toList(),
       'total_pages': totalPages,
       'total_results': totalResults,
     };
@@ -36,15 +30,4 @@ class ReviewResponseModel extends Equatable {
       totalResults: map['total_results'] as int,
     );
   }
-
-  @override
-  bool get stringify => true;
-
-  @override
-  List<Object?> get props => [
-        page,
-        results,
-        totalPages,
-        totalResults,
-      ];
 }

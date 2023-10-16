@@ -1,38 +1,58 @@
 import 'package:movielicious/src/core/enums/list_category.dart';
+import 'package:movielicious/src/data/models/models.dart';
+import 'package:movielicious/src/domain/entities/entities.dart';
 
-import '../../domain/entities/queries/movie_queries.dart';
-import '../../domain/entities/queries/search_queries.dart';
+import 'package:movielicious/src/domain/entities/requests/movie_queries.dart';
+
+import 'package:movielicious/src/domain/entities/requests/search_queries.dart';
+
 import '../../domain/repositories/movie_repositories.dart';
+import '../remote/source/movie_remote_data_source.dart';
+import 'base_api_repository.dart';
 
-class MovieRepositoryImpl implements MovieRepository {
+class MovieRepositoryImpl extends BaseApiRepository implements MovieRepository {
+  final MovieRemoteDataSource _dataSource;
+  const MovieRepositoryImpl(this._dataSource);
+
   @override
-  CreditListOrFailure getCredits({required int movieId}) {
-    // TODO: implement getCredits
-    throw UnimplementedError();
+  FailureOrCreditResponse getCredits({required int movieId}) {
+    return getStateOf<CreditResponseModel>(
+        request: () => _dataSource.getCredits(movieId));
   }
 
   @override
-  GenreListOrFailure getGenres() {
-    // TODO: implement getGenres
-    throw UnimplementedError();
+  FailureOrGenreResponse getGenres() {
+    return getStateOf<GenreResponseModel>(request: _dataSource.getGenres);
   }
 
   @override
-  MovieListOrFailure getMovies(ListCategory category,
-      {required MovieQueries requestQuery}) {
-    // TODO: implement getMovies
-    throw UnimplementedError();
+  FailureOrMovieResponse getMovies(
+    ListCategory category, {
+    required MovieQueries requestQuery,
+  }) {
+    return getStateOf<MovieResponseModel>(
+      request: () => _dataSource.getMovies(
+        category.keyword,
+        queries: requestQuery as MovieQueriesModel,
+      ),
+    );
   }
 
   @override
-  ReviewListOrFailure getReviews({required int movieId}) {
-    // TODO: implement getReviews
-    throw UnimplementedError();
+  FailureOrMovieResponse searchMovie(SearchQueries queries) {
+    return getStateOf<MovieResponseModel>(
+        request: () => _dataSource.searchMovie(queries as SearchQueriesModel));
   }
 
   @override
-  MovieListOrFailure searchMovie(SearchQueries params) {
-    // TODO: implement searchMovie
-    throw UnimplementedError();
+  FailureOrReviewResponse getReviews(
+    int movieId, {
+    required ReviewQueries queries,
+  }) {
+    return getStateOf<ReviewResponseModel>(
+        request: () => _dataSource.getReviews(
+              movieId,
+              queries as ReviewQueriesModel,
+            ));
   }
 }

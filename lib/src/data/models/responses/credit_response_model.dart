@@ -1,19 +1,16 @@
-import 'package:equatable/equatable.dart';
-
 import '../../../data/models/credit_model.dart';
+import '../../../domain/entities/responses/credit_response.dart';
 
-class CreditResponseModel extends Equatable {
-  final int id;
-  final List<CreditModel> cast;
+class CreditResponseModel extends CreditResponse {
   const CreditResponseModel({
-    required this.id,
-    required this.cast,
+    required super.id,
+    required super.cast,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'cast': cast.map((x) => x.toMap()).toList(),
+      'cast': cast.map((x) => (x as CreditModel).toMap()).toList(),
     };
   }
 
@@ -27,13 +24,4 @@ class CreditResponseModel extends Equatable {
       ),
     );
   }
-
-  @override
-  bool get stringify => true;
-
-  @override
-  List<Object> get props => [
-        id,
-        cast,
-      ];
 }

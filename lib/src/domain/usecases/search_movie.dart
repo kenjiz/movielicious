@@ -2,7 +2,7 @@ import '../entities/entities.dart';
 import '../repositories/movie_repositories.dart';
 import '../../core/usecases/usecases.dart';
 
-class SearchMovie implements UseCaseWithParams<List<Movie>, SearchQueries> {
+class SearchMovie implements UseCaseWithParams<MovieResponse, SearchQueries> {
   final MovieRepository repository;
 
   const SearchMovie({
@@ -10,7 +10,7 @@ class SearchMovie implements UseCaseWithParams<List<Movie>, SearchQueries> {
   });
 
   @override
-  MovieListOrFailure call(SearchQueries params) async {
+  FailureOrMovieResponse call(SearchQueries params) async {
     return await repository.searchMovie(params);
   }
 }

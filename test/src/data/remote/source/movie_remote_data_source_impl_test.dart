@@ -168,7 +168,7 @@ void main() {
         jsonDecode(fixture('json/review.json')) as Map<String, dynamic>);
 
     const movieId = 1;
-    const tReviewRequest = ReviewQueriesModel(movieId: movieId);
+    const tReviewRequest = ReviewQueriesModel();
 
     setUpAll(() {
       registerFallbackValue(tReviewRequest);

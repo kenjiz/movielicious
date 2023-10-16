@@ -2,7 +2,8 @@ import '../repositories/movie_repositories.dart';
 import '../../core/usecases/usecases.dart';
 import '../entities/entities.dart';
 
-class GetReviews implements UseCaseWithParams<List<Review>, ReviewQueries> {
+class GetReviews
+    implements UseCaseWithTwoParams<ReviewResponse, int, ReviewQueries> {
   final MovieRepository repository;
 
   const GetReviews({
@@ -10,7 +11,7 @@ class GetReviews implements UseCaseWithParams<List<Review>, ReviewQueries> {
   });
 
   @override
-  ReviewListOrFailure call(ReviewQueries params) async {
-    return await repository.getReviews(movieId: params.movieId);
+  FailureOrReviewResponse call(int movieId, ReviewQueries queries) async {
+    return await repository.getReviews(movieId, queries: queries);
   }
 }

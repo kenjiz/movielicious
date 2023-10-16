@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:movielicious/src/data/models/models.dart';
 import 'package:movielicious/src/domain/entities/genre.dart';
 import 'package:movielicious/src/domain/repositories/movie_repositories.dart';
 import 'package:movielicious/src/domain/usecases/get_genres.dart';
@@ -23,16 +24,18 @@ void main() {
     ),
   ];
 
-  test('should get List of [Genre] from MovieRepository', () async {
+  const tGenreResponse = GenreResponseModel(genres: tGenreList);
+
+  test('should get [GenreResponse] from MovieRepository', () async {
     // Arrange
     when(() => mockMovieRepository.getGenres())
-        .thenAnswer((_) async => const Right(tGenreList));
+        .thenAnswer((_) async => const Right(tGenreResponse));
 
     // Act
     final result = await useCase();
 
     // Assert
-    expect(result, equals(const Right(tGenreList)));
+    expect(result, equals(const Right(tGenreResponse)));
     verify(() => mockMovieRepository.getGenres()).called(1);
     verifyNoMoreInteractions(mockMovieRepository);
   });

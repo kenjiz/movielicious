@@ -9,3 +9,7 @@ abstract class UseCase<T> {
 abstract class UseCaseWithParams<T, P> {
   Future<Either<Failure, T>> call(P params);
 }
+
+abstract class UseCaseWithTwoParams<T, P, Q> {
+  Future<Either<Failure, T>> call(P params, Q query);
+}

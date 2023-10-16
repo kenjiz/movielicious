@@ -1,4 +1,4 @@
-import '../../../domain/entities/queries/search_queries.dart';
+import '../../../domain/entities/requests/search_queries.dart';
 
 class SearchQueriesModel extends SearchQueries {
   const SearchQueriesModel({
@@ -10,10 +10,10 @@ class SearchQueriesModel extends SearchQueries {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'searchTerm': searchTerm,
+      'search_term': searchTerm,
       'language': language,
       'page': page,
-      'includeAdult': includeAdult,
+      'include_adult': includeAdult,
     };
   }
 
