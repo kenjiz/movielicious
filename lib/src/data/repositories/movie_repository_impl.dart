@@ -2,12 +2,8 @@ import 'package:movielicious/src/core/enums/list_category.dart';
 import 'package:movielicious/src/data/models/models.dart';
 import 'package:movielicious/src/domain/entities/entities.dart';
 
-import 'package:movielicious/src/domain/entities/requests/movie_queries.dart';
-
-import 'package:movielicious/src/domain/entities/requests/search_queries.dart';
-
 import '../../domain/repositories/movie_repositories.dart';
-import '../remote/source/movie_remote_data_source.dart';
+import '../remote/datasource/movie_remote_data_source.dart';
 import 'base_api_repository.dart';
 
 class MovieRepositoryImpl extends BaseApiRepository implements MovieRepository {
@@ -16,8 +12,7 @@ class MovieRepositoryImpl extends BaseApiRepository implements MovieRepository {
 
   @override
   FailureOrCreditResponse getCredits({required int movieId}) {
-    return getStateOf<CreditResponseModel>(
-        request: () => _dataSource.getCredits(movieId));
+    return getStateOf<CreditResponseModel>(request: () => _dataSource.getCredits(movieId));
   }
 
   @override
@@ -40,8 +35,7 @@ class MovieRepositoryImpl extends BaseApiRepository implements MovieRepository {
 
   @override
   FailureOrMovieResponse searchMovie(SearchQueries queries) {
-    return getStateOf<MovieResponseModel>(
-        request: () => _dataSource.searchMovie(queries as SearchQueriesModel));
+    return getStateOf<MovieResponseModel>(request: () => _dataSource.searchMovie(queries as SearchQueriesModel));
   }
 
   @override

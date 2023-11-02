@@ -5,8 +5,8 @@ import 'package:movielicious/src/domain/usecases/get_top_rated_movies.dart';
 import 'package:movielicious/src/domain/usecases/get_upcoming_movies.dart';
 import 'package:movielicious/src/presentation/cubits/upcoming_movies/upcoming_movies_cubit.dart';
 import 'data/remote/service/movie_service.dart';
-import 'data/remote/source/movie_remote_data_source.dart';
-import 'data/remote/source/movie_remote_data_source_impl.dart';
+import 'data/remote/datasource/movie_remote_data_source.dart';
+import 'data/remote/datasource/movie_remote_data_source_impl.dart';
 import 'data/repositories/movie_repository_impl.dart';
 import 'domain/repositories/movie_repositories.dart';
 import 'domain/usecases/get_popular_movies.dart';
@@ -56,10 +56,17 @@ class InjectionContainer {
       )
       //* External
       ..registerLazySingleton(() {
+        String apiAccessKey = '';
+
+        if (dotenv.isInitialized) {
+          apiAccessKey = dotenv.get(kAPIAccessTokenKey);
+        }
+
         final dioHeaders = {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${dotenv.env[kAPIAccessTokenKey]}',
+          'Authorization': 'Bearer $apiAccessKey',
         };
+
         return Dio(BaseOptions(headers: dioHeaders));
       });
   }

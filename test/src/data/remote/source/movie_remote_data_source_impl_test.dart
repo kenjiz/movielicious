@@ -5,7 +5,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:movielicious/src/core/enums/list_category.dart';
 import 'package:movielicious/src/data/models/models.dart';
 import 'package:movielicious/src/data/remote/service/movie_service.dart';
-import 'package:movielicious/src/data/remote/source/movie_remote_data_source_impl.dart';
+import 'package:movielicious/src/data/remote/datasource/movie_remote_data_source_impl.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 
@@ -21,8 +21,7 @@ void main() {
   });
 
   group('getMovies', () {
-    final tMovieResponse = MovieResponseModel.fromMap(
-        jsonDecode(fixture('json/movie.json')) as Map<String, dynamic>);
+    final tMovieResponse = MovieResponseModel.fromMap(jsonDecode(fixture('json/movie.json')) as Map<String, dynamic>);
     const tMovieQueries = MovieQueriesModel();
     final tCategory = ListCategory.nowPlaying.keyword;
 
@@ -32,22 +31,18 @@ void main() {
 
     test('should return [MovieResponseModel]', () async {
       // Arrange
-      when(() => service.getMovies(any(), queries: any(named: 'queries')))
-          .thenAnswer((_) async => tMovieResponse);
+      when(() => service.getMovies(any(), queries: any(named: 'queries'))).thenAnswer((_) async => tMovieResponse);
 
       // Act
-      final response =
-          await datasource.getMovies(tCategory, queries: tMovieQueries);
+      final response = await datasource.getMovies(tCategory, queries: tMovieQueries);
 
       // Assert
       expect(response, equals(tMovieResponse));
-      verify(() => service.getMovies(tCategory, queries: tMovieQueries))
-          .called(1);
+      verify(() => service.getMovies(tCategory, queries: tMovieQueries)).called(1);
       verifyNoMoreInteractions(service);
     });
 
-    test('should return [DioError] when there\'s an error to the request',
-        () async {
+    test('should return [DioError] when there\'s an error to the request', () async {
       // Arrange
       when(() => service.getMovies(any(), queries: any(named: 'queries')))
           .thenThrow(DioException(requestOptions: RequestOptions(path: '')));
@@ -56,14 +51,12 @@ void main() {
       final call = datasource.getMovies;
 
       // Assert
-      expect(() => call(tCategory, queries: tMovieQueries),
-          throwsA(isA<DioException>()));
+      expect(() => call(tCategory, queries: tMovieQueries), throwsA(isA<DioException>()));
     });
   });
 
   group('searchMovies', () {
-    final tMovieResponse = MovieResponseModel.fromMap(
-        jsonDecode(fixture('json/movie.json')) as Map<String, dynamic>);
+    final tMovieResponse = MovieResponseModel.fromMap(jsonDecode(fixture('json/movie.json')) as Map<String, dynamic>);
     const tSearchQueries = SearchQueriesModel(searchTerm: '');
 
     setUpAll(() {
@@ -72,8 +65,7 @@ void main() {
 
     test('should return [MovieResponseModel]', () async {
       // Arrange
-      when(() => service.searchMovie(queries: any(named: 'queries')))
-          .thenAnswer((_) async => tMovieResponse);
+      when(() => service.searchMovie(queries: any(named: 'queries'))).thenAnswer((_) async => tMovieResponse);
 
       // Act
       final response = await datasource.searchMovie(tSearchQueries);
@@ -84,8 +76,7 @@ void main() {
       verifyNoMoreInteractions(service);
     });
 
-    test('should return [DioError] when there\'s an error to the request',
-        () async {
+    test('should return [DioError] when there\'s an error to the request', () async {
       // Arrange
       when(() => service.searchMovie(queries: any(named: 'queries')))
           .thenThrow(DioException(requestOptions: RequestOptions(path: '')));
@@ -99,15 +90,14 @@ void main() {
   });
 
   group('getCredits', () {
-    final tCreditResponse = CreditResponseModel.fromMap(
-        jsonDecode(fixture('json/credit.json')) as Map<String, dynamic>);
+    final tCreditResponse =
+        CreditResponseModel.fromMap(jsonDecode(fixture('json/credit.json')) as Map<String, dynamic>);
 
     const movieId = 1;
 
     test('should return [CreditResponseModel]', () async {
       // Arrange
-      when(() => service.getCredits(any()))
-          .thenAnswer((_) async => tCreditResponse);
+      when(() => service.getCredits(any())).thenAnswer((_) async => tCreditResponse);
 
       // Act
       final response = await datasource.getCredits(movieId);
@@ -118,11 +108,9 @@ void main() {
       verifyNoMoreInteractions(service);
     });
 
-    test('should return [DioError] when there\'s an error to the request',
-        () async {
+    test('should return [DioError] when there\'s an error to the request', () async {
       // Arrange
-      when(() => service.getCredits(any()))
-          .thenThrow(DioException(requestOptions: RequestOptions(path: '')));
+      when(() => service.getCredits(any())).thenThrow(DioException(requestOptions: RequestOptions(path: '')));
 
       // Act
       final call = datasource.getCredits;
@@ -133,8 +121,7 @@ void main() {
   });
 
   group('getGenres', () {
-    final tGenreResponse = GenreResponseModel.fromMap(
-        jsonDecode(fixture('json/genre.json')) as Map<String, dynamic>);
+    final tGenreResponse = GenreResponseModel.fromMap(jsonDecode(fixture('json/genre.json')) as Map<String, dynamic>);
 
     test('should return [GenreResponseModel]', () async {
       // Arrange
@@ -149,11 +136,9 @@ void main() {
       verifyNoMoreInteractions(service);
     });
 
-    test('should return [DioError] when there\'s an error to the request',
-        () async {
+    test('should return [DioError] when there\'s an error to the request', () async {
       // Arrange
-      when(() => service.getGenres())
-          .thenThrow(DioException(requestOptions: RequestOptions(path: '')));
+      when(() => service.getGenres()).thenThrow(DioException(requestOptions: RequestOptions(path: '')));
 
       // Act
       final call = datasource.getGenres;
@@ -164,8 +149,8 @@ void main() {
   });
 
   group('getReviews', () {
-    final tReviewResponseModel = ReviewResponseModel.fromMap(
-        jsonDecode(fixture('json/review.json')) as Map<String, dynamic>);
+    final tReviewResponseModel =
+        ReviewResponseModel.fromMap(jsonDecode(fixture('json/review.json')) as Map<String, dynamic>);
 
     const movieId = 1;
     const tReviewRequest = ReviewQueriesModel();
@@ -184,13 +169,11 @@ void main() {
 
       // Assert
       expect(response, equals(tReviewResponseModel));
-      verify(() => service.getReviews(movieId, queries: tReviewRequest))
-          .called(1);
+      verify(() => service.getReviews(movieId, queries: tReviewRequest)).called(1);
       verifyNoMoreInteractions(service);
     });
 
-    test('should return [DioError] when there\'s an error to the request',
-        () async {
+    test('should return [DioError] when there\'s an error to the request', () async {
       // Arrange
       when(() => service.getReviews(any(), queries: any(named: 'queries')))
           .thenThrow(DioException(requestOptions: RequestOptions(path: '')));
