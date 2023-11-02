@@ -1,15 +1,16 @@
+import '../../../../../core/service/tmdb_service.dart';
 import '../../../../credit/data/model/credit_response_model.dart';
 import '../../../../genre/data/model/genre_response_model.dart';
 import '../../../../reviews/data/model/review_queries_model.dart';
 import '../../../../reviews/data/model/review_response_model.dart';
 import '../../../../search/data/model/search_queries_model.dart';
-import 'movie_remote_data_source.dart';
-import '../service/movie_service.dart';
 import '../../models/movie_queries_model.dart';
 import '../../models/movie_response_model.dart';
 
+import 'movie_remote_data_source.dart';
+
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
-  final MovieService service;
+  final TMDBService service;
 
   const MovieRemoteDataSourceImpl({
     required this.service,

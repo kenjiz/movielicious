@@ -1,20 +1,20 @@
-import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:dio/dio.dart';
 
-import '../../../../../core/constants/http_constants.dart';
-import '../../../../credit/data/model/credit_response_model.dart';
-import '../../../../genre/data/model/genre_response_model.dart';
-import '../../../../reviews/data/model/review_queries_model.dart';
-import '../../../../reviews/data/model/review_response_model.dart';
-import '../../../../search/data/model/search_queries_model.dart';
-import '../../models/movie_queries_model.dart';
-import '../../models/movie_response_model.dart';
+import '../../features/credit/data/model/credit_response_model.dart';
+import '../../features/genre/data/model/genre_response_model.dart';
+import '../../features/movies/data/models/movie_queries_model.dart';
+import '../../features/movies/data/models/movie_response_model.dart';
+import '../../features/reviews/data/model/review_queries_model.dart';
+import '../../features/reviews/data/model/review_response_model.dart';
+import '../../features/search/data/model/search_queries_model.dart';
+import '../constants/http_constants.dart';
 
-part 'movie_service.g.dart';
+part 'tmdb_service.g.dart';
 
 @RestApi(baseUrl: kHttpBaseUrl, parser: Parser.MapSerializable)
-abstract class MovieService {
-  factory MovieService(Dio dio, {String baseUrl}) = _MovieService;
+abstract class TMDBService {
+  factory TMDBService(Dio dio, {String baseUrl}) = _TMDBService;
 
   /// Calls the https://api.themoviedb.org/3/movie/{category} endpoint.
   /// Takes the property value of [MovieQueries] and

@@ -2,10 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
+import 'core/service/tmdb_service.dart';
+import 'features/genre/domain/usecase/get_genres.dart';
+import 'features/genre/presentation/cubit/genre/genre_cubit.dart';
 import 'core/constants/http_constants.dart';
+import 'features/genre/data/datasource/remote/genre_remote_data_source.dart';
+import 'features/genre/data/datasource/remote/genre_remote_data_source_impl.dart';
+import 'features/genre/data/repository/genre_repository_impl.dart';
+import 'features/genre/domain/repository/genre_repository.dart';
 import 'features/movies/data/remote/datasource/movie_remote_data_source.dart';
 import 'features/movies/data/remote/datasource/movie_remote_data_source_impl.dart';
-import 'features/movies/data/remote/service/movie_service.dart';
 import 'features/movies/data/repositories/movie_repository_impl.dart';
 import 'features/movies/domain/repository/movie_repositories.dart';
 import 'features/movies/domain/usecase/get_popular_movies.dart';
@@ -32,6 +38,9 @@ class InjectionContainer {
       ..registerFactory(
         () => TopRatedMoviesCubit(sl()),
       )
+      ..registerFactory(
+        () => GenreCubit(sl()),
+      )
       //* Usecases
       ..registerLazySingleton(
         () => GetUpcomingMovies(repository: sl()),
@@ -42,18 +51,28 @@ class InjectionContainer {
       ..registerLazySingleton(
         () => GetTopRatedMovies(repository: sl()),
       )
+      ..registerLazySingleton(
+        () => GetGenres(repository: sl()),
+      )
       //* Repositories
       ..registerLazySingleton<MovieRepository>(
         () => MovieRepositoryImpl(sl()),
+      )
+      ..registerLazySingleton<GenreRepository>(
+        () => GenreRepositoryImpl(sl()),
       )
       //* Data Sources
       ..registerLazySingleton<MovieRemoteDataSource>(
         () => MovieRemoteDataSourceImpl(service: sl()),
       )
+      ..registerLazySingleton<GenreRemoteDataSource>(
+        () => GenreRemoteDataSourceImpl(service: sl()),
+      )
       //* Services
       ..registerLazySingleton(
-        () => MovieService(sl()),
+        () => TMDBService(sl()),
       )
+
       //* External
       ..registerLazySingleton(() {
         String apiAccessKey = '';

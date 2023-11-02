@@ -3,19 +3,19 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:movielicious/src/core/enums/list_category.dart';
+import 'package:movielicious/src/core/service/tmdb_service.dart';
 import 'package:movielicious/src/features/credit/data/model/credit_response_model.dart';
 import 'package:movielicious/src/features/genre/data/model/genre_response_model.dart';
 import 'package:movielicious/src/features/movies/data/models/movie_queries_model.dart';
 import 'package:movielicious/src/features/movies/data/models/movie_response_model.dart';
 import 'package:movielicious/src/features/movies/data/remote/datasource/movie_remote_data_source_impl.dart';
-import 'package:movielicious/src/features/movies/data/remote/service/movie_service.dart';
 import 'package:movielicious/src/features/reviews/data/model/review_queries_model.dart';
 import 'package:movielicious/src/features/reviews/data/model/review_response_model.dart';
 import 'package:movielicious/src/features/search/data/model/search_queries_model.dart';
 
 import '../../../../../../fixtures/fixture_reader.dart';
 
-class MockMovieService extends Mock implements MovieService {}
+class MockMovieService extends Mock implements TMDBService {}
 
 void main() {
   late MockMovieService service;
