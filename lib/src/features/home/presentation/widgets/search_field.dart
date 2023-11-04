@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../pages/movie_listing_page.dart';
+import '../../../movies/presentation/pages/movie_listing_page.dart';
 import '../../../../core/constants/theme_constants.dart';
 
 class SearchField extends StatefulWidget {

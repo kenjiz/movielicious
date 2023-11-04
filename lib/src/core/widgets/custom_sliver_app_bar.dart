@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/constants/http_constants.dart';
-import '../cubits/popular_movies/popular_movies_cubit.dart';
-import 'search_field.dart';
+import '../constants/http_constants.dart';
+import '../../features/movies/presentation/cubits/popular_movies/popular_movies_cubit.dart';
+import '../../features/home/presentation/widgets/search_field.dart';
 
 class CustomSliverAppBar extends StatelessWidget {
   const CustomSliverAppBar({super.key});
