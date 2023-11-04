@@ -1,16 +1,13 @@
 part of 'genre_cubit.dart';
 
 sealed class GenreState extends Equatable {
-  final List<Genre> genres;
-  final ServerFailure? error;
-
-  const GenreState({
-    this.genres = const [],
-    this.error,
-  });
+  const GenreState();
 
   @override
-  List<Object> get props => [];
+  bool get stringify => true;
+
+  @override
+  List<Object?> get props => [];
 }
 
 final class GenreLoading extends GenreState {
@@ -18,16 +15,23 @@ final class GenreLoading extends GenreState {
 }
 
 final class GenreSuccess extends GenreState {
+  final List<Genre> genres;
+
   const GenreSuccess({
     required this.genres,
   });
 
   @override
-  final List<Genre> genres;
+  List<Object> get props => [genres];
 }
 
 final class GenreFailed extends GenreState {
+  final ServerFailure error;
+
   const GenreFailed({
-    super.error,
+    required this.error,
   });
+
+  @override
+  List<Object> get props => [error];
 }

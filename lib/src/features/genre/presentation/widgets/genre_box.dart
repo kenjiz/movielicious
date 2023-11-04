@@ -12,17 +12,7 @@ class GenreBox extends StatelessWidget {
   });
 
   Color get getRandomBoxColor {
-    const List<Color> colorList = [
-      Color(0xFFe5383b),
-      Color(0xFF1b263b),
-      Color(0xFF386641),
-      Color(0xFF0096c7),
-      Color(0xFFdf367c),
-      Color(0xFF7209b7),
-      Color(0xFF006ba6),
-    ];
-
-    return colorList[Random().nextInt(colorList.length)];
+    return Color((Random().nextDouble() * 0xFF000000).toInt()).withOpacity(1.0);
   }
 
   @override

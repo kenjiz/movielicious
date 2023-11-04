@@ -6,12 +6,12 @@ class SliverHorizontalContainer extends StatelessWidget {
     super.key,
     required this.sectionTitle,
     required this.list,
-    required this.height,
+    this.height,
   });
 
   final String sectionTitle;
   final Widget list;
-  final double height;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SliverHorizontalContainer extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Container(
         width: size.width,
-        height: height,
+        height: height ?? size.height * 0.3,
         margin: const EdgeInsets.symmetric(
           vertical: kAppWidgetMargin,
         ),
