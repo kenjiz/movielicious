@@ -1,4 +1,6 @@
 import 'package:movielicious/src/core/enums/list_category.dart';
+import 'package:movielicious/src/features/genre/data/model/genre_queries_model.dart';
+import 'package:movielicious/src/features/genre/domain/entity/genre_queries.dart';
 
 import '../../../credit/data/model/credit_response_model.dart';
 import '../../../genre/data/model/genre_response_model.dart';
@@ -56,5 +58,12 @@ class MovieRepositoryImpl extends BaseApiRepository implements MovieRepository {
               movieId,
               queries as ReviewQueriesModel,
             ));
+  }
+
+  @override
+  FailureOrMovieResponse getMoviesByGenres({required GenreQueries queries}) {
+    return getStateOf<MovieResponseModel>(
+      request: () => _dataSource.getMoviesByGenres(queries as GenreQueriesModel),
+    );
   }
 }

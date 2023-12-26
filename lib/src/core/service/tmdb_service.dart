@@ -1,3 +1,5 @@
+import 'package:movielicious/src/features/genre/data/model/genre_queries_model.dart';
+import 'package:movielicious/src/features/genre/domain/entity/genre_queries.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
@@ -24,6 +26,15 @@ abstract class TMDBService {
   Future<MovieResponseModel> getMovies(
     @Path('category') String category, {
     @Queries() required MovieQueriesModel queries,
+  });
+
+  /// Calls the https://api.themoviedb.org/3/discover/movie=with_genres{genreIds} endpoint.
+  /// Takes the property value of [GenreQueries] and
+  /// returns a [MovieResponseModel].
+  /// Throws a [DioException] for all error codes.
+  @GET('/discover')
+  Future<MovieResponseModel> getMoviesByGenres({
+    @Queries() required GenreQueriesModel queries,
   });
 
   /// Calls the https://api.themoviedb.org/3/search/movie?query={params.searchTerm} endpoint.

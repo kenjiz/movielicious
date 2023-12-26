@@ -1,3 +1,5 @@
+import 'package:movielicious/src/features/genre/data/model/genre_queries_model.dart';
+
 import '../../../../../core/service/tmdb_service.dart';
 import '../../../../credit/data/model/credit_response_model.dart';
 import '../../../../genre/data/model/genre_response_model.dart';
@@ -45,5 +47,10 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     ReviewQueriesModel queries,
   ) async {
     return await service.getReviews(movieId, queries: queries);
+  }
+
+  @override
+  Future<MovieResponseModel> getMoviesByGenres(GenreQueriesModel queries) async {
+    return await service.getMoviesByGenres(queries: queries);
   }
 }

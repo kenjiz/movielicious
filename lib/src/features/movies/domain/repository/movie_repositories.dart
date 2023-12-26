@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:movielicious/src/features/genre/domain/entity/genre_queries.dart';
 
 import '../../../../core/enums/list_category.dart';
 import '../../../../core/errors/failures.dart';
@@ -42,4 +43,8 @@ abstract class MovieRepository {
     int movieId, {
     required ReviewQueries queries,
   });
+
+  /// Get the list of [Movie] based on the value of [GenreQueries]
+  /// Return [Failure] when there's an exception.
+  FailureOrMovieResponse getMoviesByGenres({required GenreQueries queries});
 }

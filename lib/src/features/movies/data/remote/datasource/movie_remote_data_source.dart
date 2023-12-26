@@ -1,3 +1,5 @@
+import 'package:movielicious/src/features/genre/data/model/genre_queries_model.dart';
+
 import '../../models/movie_queries_model.dart';
 import '../../models/movie_response_model.dart';
 import '../../../../credit/data/model/credit_response_model.dart';
@@ -13,6 +15,8 @@ abstract class MovieRemoteDataSource {
   });
 
   Future<MovieResponseModel> searchMovie(SearchQueriesModel queries);
+
+  Future<MovieResponseModel> getMoviesByGenres(GenreQueriesModel queries);
 
   Future<CreditResponseModel> getCredits(int movieId);
 

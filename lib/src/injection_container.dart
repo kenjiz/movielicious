@@ -1,19 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
+import 'package:movielicious/src/features/movies/presentation/cubits/movies_by_genres/movies_by_genres_cubit.dart';
 
-import 'core/service/tmdb_service.dart';
-import 'features/genre/domain/usecase/get_genres.dart';
-import 'features/genre/presentation/cubit/genre/genre_cubit.dart';
 import 'core/constants/http_constants.dart';
+import 'core/service/tmdb_service.dart';
 import 'features/genre/data/datasource/remote/genre_remote_data_source.dart';
 import 'features/genre/data/datasource/remote/genre_remote_data_source_impl.dart';
 import 'features/genre/data/repository/genre_repository_impl.dart';
 import 'features/genre/domain/repository/genre_repository.dart';
+import 'features/genre/domain/usecase/get_genres.dart';
+import 'features/genre/presentation/cubit/genre/genre_cubit.dart';
 import 'features/movies/data/remote/datasource/movie_remote_data_source.dart';
 import 'features/movies/data/remote/datasource/movie_remote_data_source_impl.dart';
 import 'features/movies/data/repositories/movie_repository_impl.dart';
 import 'features/movies/domain/repository/movie_repositories.dart';
+import 'features/movies/domain/usecase/get_movies_by_genres.dart';
 import 'features/movies/domain/usecase/get_popular_movies.dart';
 import 'features/movies/domain/usecase/get_top_rated_movies.dart';
 import 'features/movies/domain/usecase/get_upcoming_movies.dart';
@@ -41,6 +43,9 @@ class InjectionContainer {
       ..registerFactory(
         () => GenreCubit(sl()),
       )
+      ..registerFactory(
+        () => MoviesByGenresCubit(sl()),
+      )
       //* Usecases
       ..registerLazySingleton(
         () => GetUpcomingMovies(repository: sl()),
@@ -53,6 +58,9 @@ class InjectionContainer {
       )
       ..registerLazySingleton(
         () => GetGenres(repository: sl()),
+      )
+      ..registerLazySingleton(
+        () => GetMoviesByGenres(repository: sl()),
       )
       //* Repositories
       ..registerLazySingleton<MovieRepository>(

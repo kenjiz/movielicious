@@ -5,6 +5,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:movielicious/src/core/enums/list_category.dart';
 import 'package:movielicious/src/core/service/tmdb_service.dart';
 import 'package:movielicious/src/features/credit/data/model/credit_response_model.dart';
+import 'package:movielicious/src/features/genre/data/model/genre_queries_model.dart';
 import 'package:movielicious/src/features/genre/data/model/genre_response_model.dart';
 import 'package:movielicious/src/features/movies/data/models/movie_queries_model.dart';
 import 'package:movielicious/src/features/movies/data/models/movie_response_model.dart';
@@ -151,6 +152,40 @@ void main() {
 
       // Assert
       expect(() => call(), throwsA(isA<DioException>()));
+    });
+  });
+
+  group('getMoviesByGenres', () {
+    final tMovieResponse = MovieResponseModel.fromMap(jsonDecode(fixture('json/movie.json')) as Map<String, dynamic>);
+    const tGenreQueryModel = GenreQueriesModel(genreIds: [1, 2]);
+
+    setUpAll(() {
+      registerFallbackValue(tGenreQueryModel);
+    });
+
+    test('should return [MovieResponseModel]', () async {
+      // Arrange
+      when(() => service.getMoviesByGenres(queries: any(named: 'queries'))).thenAnswer((_) async => tMovieResponse);
+
+      // Act
+      final response = await datasource.getMoviesByGenres(tGenreQueryModel);
+
+      // Assert
+      expect(response, equals(tMovieResponse));
+      verify(() => service.getMoviesByGenres(queries: tGenreQueryModel)).called(1);
+      verifyNoMoreInteractions(service);
+    });
+
+    test('should return [DioError] when there\'s an error to the request', () async {
+      // Arrange
+      when(() => service.getMoviesByGenres(queries: any(named: 'queries')))
+          .thenThrow(DioException(requestOptions: RequestOptions(path: '')));
+
+      // Act
+      final call = datasource.getMoviesByGenres;
+
+      // Assert
+      expect(() => call(tGenreQueryModel), throwsA(isA<DioException>()));
     });
   });
 
