@@ -1,27 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
-import 'package:movielicious/src/features/movies/presentation/cubits/movies_by_genres/movies_by_genres_cubit.dart';
 
-import 'core/constants/http_constants.dart';
-import 'core/service/tmdb_service.dart';
-import 'features/genre/data/datasource/remote/genre_remote_data_source.dart';
-import 'features/genre/data/datasource/remote/genre_remote_data_source_impl.dart';
-import 'features/genre/data/repository/genre_repository_impl.dart';
-import 'features/genre/domain/repository/genre_repository.dart';
-import 'features/genre/domain/usecase/get_genres.dart';
-import 'features/genre/presentation/cubit/genre/genre_cubit.dart';
-import 'features/movies/data/remote/datasource/movie_remote_data_source.dart';
-import 'features/movies/data/remote/datasource/movie_remote_data_source_impl.dart';
-import 'features/movies/data/repositories/movie_repository_impl.dart';
-import 'features/movies/domain/repository/movie_repositories.dart';
-import 'features/movies/domain/usecase/get_movies_by_genres.dart';
-import 'features/movies/domain/usecase/get_popular_movies.dart';
-import 'features/movies/domain/usecase/get_top_rated_movies.dart';
-import 'features/movies/domain/usecase/get_upcoming_movies.dart';
-import 'features/movies/presentation/cubits/popular_movies/popular_movies_cubit.dart';
-import 'features/movies/presentation/cubits/top_rated_movies/top_rated_movies_cubit.dart';
-import 'features/movies/presentation/cubits/upcoming_movies/upcoming_movies_cubit.dart';
+import 'package:movielicious/src/core/constants/http_constants.dart';
+import 'package:movielicious/src/core/service/tmdb_api.dart';
+import 'package:movielicious/src/features/movies/application/movie_service.dart';
+import 'package:movielicious/src/features/movies/data/source/movie_repository.dart';
+import 'package:movielicious/src/features/movies/presentation/cubit/movies_cubit.dart';
 
 class InjectionContainer {
   const InjectionContainer._();
@@ -31,54 +16,24 @@ class InjectionContainer {
   static Future<void> init() async {
     sl
       //* Cubits
-      ..registerFactory(
-        () => PopularMoviesCubit(sl()),
+      ..registerFactory(() => UpcomingMoviesCubit(sl()))
+      ..registerFactory(() => TopRatedMoviesCubit(sl()))
+      ..registerFactory(() => NowPlayingMoviesCubit(sl()))
+      ..registerFactory(() => PopularMoviesCubit(sl()))
+
+      //* Application Service
+      ..registerLazySingleton<MovieService>(
+        () => MovieService(sl()),
       )
-      ..registerFactory(
-        () => UpcomingMoviesCubit(sl()),
-      )
-      ..registerFactory(
-        () => TopRatedMoviesCubit(sl()),
-      )
-      ..registerFactory(
-        () => GenreCubit(sl()),
-      )
-      ..registerFactory(
-        () => MoviesByGenresCubit(sl()),
-      )
-      //* Usecases
-      ..registerLazySingleton(
-        () => GetUpcomingMovies(repository: sl()),
-      )
-      ..registerLazySingleton(
-        () => GetPopularMovies(repository: sl()),
-      )
-      ..registerLazySingleton(
-        () => GetTopRatedMovies(repository: sl()),
-      )
-      ..registerLazySingleton(
-        () => GetGenres(repository: sl()),
-      )
-      ..registerLazySingleton(
-        () => GetMoviesByGenres(repository: sl()),
-      )
+
       //* Repositories
       ..registerLazySingleton<MovieRepository>(
-        () => MovieRepositoryImpl(sl()),
+        () => MovieRepository(sl()),
       )
-      ..registerLazySingleton<GenreRepository>(
-        () => GenreRepositoryImpl(sl()),
-      )
-      //* Data Sources
-      ..registerLazySingleton<MovieRemoteDataSource>(
-        () => MovieRemoteDataSourceImpl(service: sl()),
-      )
-      ..registerLazySingleton<GenreRemoteDataSource>(
-        () => GenreRemoteDataSourceImpl(service: sl()),
-      )
-      //* Services
+
+      //* API
       ..registerLazySingleton(
-        () => TMDBService(sl()),
+        () => TMDBApi(sl()),
       )
 
       //* External

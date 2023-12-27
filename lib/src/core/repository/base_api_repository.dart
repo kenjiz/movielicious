@@ -1,6 +1,6 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:fpdart/fpdart.dart';
 
 import '../errors/failures.dart';
 
@@ -25,10 +25,23 @@ abstract class BaseApiRepository {
     } on DioException catch (e) {
       return Left(
         ServerFailure(
-          statusCode: e.response?.statusCode,
-          statusMessage: e.response?.statusMessage,
+          code: e.response?.statusCode,
+          message: e.response?.statusMessage ?? 'Server error occured',
         ),
       );
     }
+  }
+
+  @protected
+  TaskEither<ServerFailure, T> processRequest<T>({
+    required Future<T> Function() request,
+  }) {
+    return TaskEither.tryCatch(() => request(), (e, st) {
+      print(st);
+      return ServerFailure(
+        code: 500,
+        message: e.toString(),
+      );
+    });
   }
 }

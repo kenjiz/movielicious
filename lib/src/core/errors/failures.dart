@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
 abstract class Failure extends Equatable {
@@ -6,14 +5,14 @@ abstract class Failure extends Equatable {
 }
 
 class ServerFailure extends Failure {
-  final int? statusCode;
-  final String? statusMessage;
+  final int? code;
+  final String message;
 
   const ServerFailure({
-    required this.statusCode,
-    required this.statusMessage,
+    required this.code,
+    required this.message,
   });
 
   @override
-  List<Object?> get props => [statusCode, statusMessage];
+  List<Object?> get props => [code, message];
 }

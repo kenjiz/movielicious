@@ -1,19 +1,19 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:movielicious/src/core/constants/http_constants.dart';
 
-import '../../../../core/constants/theme_constants.dart';
-import '../../domain/entity/movie.dart';
-import 'rating_box.dart';
+import 'package:movielicious/src/core/constants/http_constants.dart';
+import 'package:movielicious/src/core/constants/theme_constants.dart';
+import 'package:movielicious/src/features/movies/domain/models/movie.dart';
+import 'package:movielicious/src/features/movies/presentation/widgets/rating_box.dart';
 
 class MovieTile extends StatelessWidget {
   const MovieTile({
-    Key? key,
+    super.key,
     required this.movie,
     this.withTitle = true,
     this.horizontalMargin = 0,
     this.verticalMargin = 0,
-  }) : super(key: key);
+  });
 
   final Movie movie;
   final double horizontalMargin;
@@ -90,7 +90,7 @@ class MovieTile extends StatelessWidget {
           right: 10,
           top: 10,
           child: RatingBox(
-            rating: movie.voteAverage,
+            rating: movie.voteAverage.toStringAsPrecision(2),
           ),
         )
       ],
