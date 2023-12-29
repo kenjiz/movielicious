@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fpdart/fpdart.dart';
+import 'package:movielicious/src/features/errors/domain/models/api_request_error.dart';
 
-import 'package:movielicious/src/core/errors/failures.dart';
 import 'package:movielicious/src/features/movies/application/movie_service.dart';
+import 'package:movielicious/src/features/movies/data/movie_repository.dart';
 import 'package:movielicious/src/features/movies/domain/enums/movie_category.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie_queries.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie_response.dart';
@@ -19,7 +19,7 @@ class BaseMoviesCubit extends Cubit<MoviesState> {
   ]) async {
     emit(const MoviesLoading());
 
-    late TaskEither<ServerFailure, MovieResponse> result;
+    late FutureEitherMovieResponse result;
 
     switch (category) {
       case MovieCategory.nowPlaying:
@@ -48,7 +48,7 @@ class BaseMoviesCubit extends Cubit<MoviesState> {
         ),
       );
 
-  void _processResponseError(ServerFailure error) => emit(
+  void _processResponseError(ApiRequestError error) => emit(
         MoviesFailure(error.message),
       );
 }

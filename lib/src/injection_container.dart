@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:movielicious/src/core/constants/http_constants.dart';
 import 'package:movielicious/src/core/service/tmdb_api.dart';
 import 'package:movielicious/src/features/movies/application/movie_service.dart';
-import 'package:movielicious/src/features/movies/data/source/movie_repository.dart';
+import 'package:movielicious/src/features/movies/data/movie_repository.dart';
 import 'package:movielicious/src/features/movies/presentation/cubit/movies_cubit.dart';
 
 class InjectionContainer {

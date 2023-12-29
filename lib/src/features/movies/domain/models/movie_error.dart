@@ -1,8 +1,8 @@
-import 'package:movielicious/src/core/errors/failures.dart';
+import 'package:movielicious/src/features/errors/domain/models/request_error.dart';
 
-class MoviesError extends Failure {
+class MoviesError implements RequestError {
   const MoviesError();
 
   @override
-  List<Object?> get props => [];
+  String get message => 'There\'s a problem fetching movies from API.';
 }
