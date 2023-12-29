@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../constants/theme_constants.dart';
-import '../../features/movies/domain/entity/movie.dart';
-import '../../features/movies/presentation/widgets/movie_tile.dart';
-import 'circular_icon_button.dart';
+import 'package:movielicious/src/core/constants/theme_constants.dart';
+import 'package:movielicious/src/core/widgets/circular_icon_button.dart';
+import 'package:movielicious/src/features/movies/domain/models/movie.dart';
+import 'package:movielicious/src/features/movies/presentation/widgets/movie_tile.dart';
 
 class HorizontalMovieList extends StatelessWidget {
   final List<Movie> movies;
