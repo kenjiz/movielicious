@@ -17,9 +17,9 @@ class HomePage2 extends StatelessWidget {
           final width = constraints.maxWidth;
           final height = constraints.maxHeight;
 
-          return LimitedBox(
-            maxHeight: height,
-            maxWidth: width,
+          return SizedBox(
+            height: height,
+            width: width,
             child: Column(
               children: [
                 LimitedBox(

@@ -38,12 +38,9 @@ abstract class TMDBApi {
   Future<MovieResponse> searchMovie({
     @Queries() required SearchQueriesModel queries,
   });
+  */
 
-  /// Calls the https://api.themoviedb.org/3/genre/movie/list endpoint.
-  /// Returns a [GenreResponseModel].
-  /// Throws a [DioException] for all error codes.
-  @GET('/genre/movie/list')
-  Future<GenreResponseModel> getGenres();
+  /*
 
   /// Calls the https://api.themoviedb.org/3/movie/{movieId}/credits endpoint.
   /// Takes a value of the [movieId],

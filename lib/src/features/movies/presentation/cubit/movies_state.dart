@@ -12,7 +12,7 @@ final class MoviesLoading extends MoviesState {
 }
 
 final class MoviesLoaded extends MoviesState {
-  final List<Movie> movies;
+  final List<MovieWithGenre> movies;
   final int page;
   final int totalPages;
   final int totalResults;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movielicious/src/core/constants/http_constants.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie.dart';
+import 'package:movielicious/src/features/movies/domain/models/movie_with_genre.dart';
 import 'package:movielicious/src/features/movies/presentation/cubit/movies_cubit.dart';
 
 class FeaturedCarousel extends StatelessWidget {
@@ -34,7 +34,7 @@ class FeaturedCarousel extends StatelessWidget {
     );
   }
 
-  List<Widget> imageSliders(BuildContext context, List<Movie> movies) => movies
+  List<Widget> imageSliders(BuildContext context, List<MovieWithGenre> movies) => movies
       .map(
         (item) => GestureDetector(
           onTap: () {

@@ -4,8 +4,8 @@ import 'package:movielicious/src/features/errors/domain/models/api_request_error
 import 'package:movielicious/src/features/movies/application/movie_service.dart';
 import 'package:movielicious/src/features/movies/data/movie_repository.dart';
 import 'package:movielicious/src/features/movies/domain/enums/movie_category.dart';
+import 'package:movielicious/src/features/movies/domain/models/movie_page.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie_queries.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie_response.dart';
 import 'package:movielicious/src/features/movies/presentation/cubit/movies_cubit.dart';
 
 class BaseMoviesCubit extends Cubit<MoviesState> {
@@ -19,7 +19,7 @@ class BaseMoviesCubit extends Cubit<MoviesState> {
   ]) async {
     emit(const MoviesLoading());
 
-    late FutureEitherMovieResponse result;
+    late FutureEitherMoviePage result;
 
     switch (category) {
       case MovieCategory.nowPlaying:
@@ -39,12 +39,12 @@ class BaseMoviesCubit extends Cubit<MoviesState> {
     result.match(_processResponseError, _processMovieResponse).run();
   }
 
-  void _processMovieResponse(MovieResponse response) => emit(
+  void _processMovieResponse(MoviePage moviePage) => emit(
         MoviesLoaded(
-          movies: response.results,
-          page: response.page,
-          totalPages: response.totalPages,
-          totalResults: response.totalResults,
+          movies: moviePage.results,
+          page: moviePage.page,
+          totalPages: moviePage.totalPages,
+          totalResults: moviePage.totalResults,
         ),
       );
 
