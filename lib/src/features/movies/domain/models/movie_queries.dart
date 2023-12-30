@@ -1,4 +1,6 @@
-class MovieQueries {
+import 'package:equatable/equatable.dart';
+
+class MovieQueries extends Equatable {
   final int? page;
   final String? language;
 
@@ -20,4 +22,7 @@ class MovieQueries {
       language: map['language'] != null ? map['language'] as String : null,
     );
   }
+
+  @override
+  List<Object?> get props => [page, language];
 }

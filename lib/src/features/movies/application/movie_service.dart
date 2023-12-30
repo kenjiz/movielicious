@@ -7,19 +7,19 @@ class MovieService {
 
   MovieService(this._repository);
 
-  FutureEitherMovieResponse getNowPlayingMovies(MovieQueries? queries) {
+  FutureEitherMoviePage getNowPlayingMovies(MovieQueries? queries) {
     return _repository.getMovies(MovieCategory.nowPlaying, queries);
   }
 
-  FutureEitherMovieResponse getUpcomingMovies(MovieQueries? queries) {
+  FutureEitherMoviePage getUpcomingMovies(MovieQueries? queries) {
     return _repository.getMovies(MovieCategory.upcoming, queries);
   }
 
-  FutureEitherMovieResponse getTopRatedMovies(MovieQueries? queries) {
+  FutureEitherMoviePage getTopRatedMovies(MovieQueries? queries) {
     return _repository.getMovies(MovieCategory.topRated, queries);
   }
 
-  FutureEitherMovieResponse getPopularMovies(MovieQueries? queries) {
+  FutureEitherMoviePage getPopularMovies(MovieQueries? queries) {
     return _repository.getMovies(MovieCategory.popular, queries);
   }
 }

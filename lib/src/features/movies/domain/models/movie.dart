@@ -1,10 +1,11 @@
-import 'dart:convert';
+import 'package:equatable/equatable.dart';
 
 import 'package:movielicious/src/core/constants/http_constants.dart';
+import 'package:movielicious/src/features/genres/domain/models/genre.dart';
 
-class Movie {
+class Movie extends Equatable {
   final int id;
-  final List<int> genres;
+  final List<Genre> genres;
   final String backdropPath;
   final String posterPath;
   final String title;
@@ -12,7 +13,7 @@ class Movie {
   final String year;
   final double vote;
 
-  Movie({
+  const Movie({
     required this.id,
     required this.genres,
     required this.backdropPath,
@@ -22,36 +23,6 @@ class Movie {
     required this.year,
     required this.vote,
   });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'genre_ids': genres,
-      'backdrop_path': backdropPath,
-      'poster_path': posterPath,
-      'title': title,
-      'overview': overview,
-      'release_date': year,
-      'vote_average': vote,
-    };
-  }
-
-  factory Movie.fromMap(Map<String, dynamic> map) {
-    return Movie(
-      id: map['id']?.toInt() ?? 0,
-      genres: List<int>.from(map['genre_ids']),
-      backdropPath: map['backdrop_path'] ?? '',
-      posterPath: map['poster_path'] ?? '',
-      title: map['title'] ?? '',
-      overview: map['overview'] ?? '',
-      year: map['release_date'] ?? '',
-      vote: map['vote_average'] ?? 0,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Movie.fromJson(String source) => Movie.fromMap(json.decode(source));
 
   /// Get only the year
   String get getYear => year.split('-')[0];
@@ -67,5 +38,19 @@ class Movie {
 
   /// get genre
   /// TODO: Get actual genre name
-  String get genresByName => genres.getRange(0, 1).join('/');
+  String get genresByName => genres.getRange(0, 1).map((genre) => genre.name).join('/');
+
+  @override
+  List<Object> get props {
+    return [
+      id,
+      genres,
+      backdropPath,
+      posterPath,
+      title,
+      overview,
+      year,
+      vote,
+    ];
+  }
 }
