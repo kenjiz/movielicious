@@ -5,11 +5,11 @@ import 'package:movielicious/src/core/service/tmdb_api.dart';
 import 'package:movielicious/src/features/errors/domain/models/api_request_error.dart';
 import 'package:movielicious/src/features/genres/data/genre_data.dart';
 import 'package:movielicious/src/features/movies/domain/enums/movie_category.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie.dart';
+import 'package:movielicious/src/features/movies/domain/models/raw_movie.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie_page.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie_queries.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie_response.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie_with_genre.dart';
+import 'package:movielicious/src/features/movies/domain/models/movie.dart';
 
 typedef FutureEitherMoviePage = TaskEither<ApiRequestError, MoviePage>;
 
@@ -28,12 +28,12 @@ class MovieRepository extends BaseApiRepository {
   }
 
   FutureEitherMoviePage _getGenreName(MovieResponse response) {
-    final List<Movie> movies = response.results;
+    final List<RawMovie> movies = response.results;
 
     final results = movies.map((movie) {
       final genres = movie.genres.map((genreId) => genreList.firstWhere((genre) => genre.id == genreId)).toList();
 
-      return MovieWithGenre(
+      return Movie(
         id: movie.id,
         genres: genres,
         backdropPath: movie.backdropPath,

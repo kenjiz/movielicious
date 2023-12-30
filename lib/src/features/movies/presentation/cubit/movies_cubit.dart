@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:movielicious/src/features/movies/domain/enums/movie_category.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie_with_genre.dart';
+import 'package:movielicious/src/features/movies/domain/models/movie.dart';
 import 'package:movielicious/src/features/movies/presentation/cubit/base_movies_cubit.dart';
 
 part 'movies_state.dart';

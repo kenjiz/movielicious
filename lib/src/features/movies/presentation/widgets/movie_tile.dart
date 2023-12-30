@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:movielicious/src/core/constants/http_constants.dart';
 import 'package:movielicious/src/core/constants/theme_constants.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie_with_genre.dart';
+import 'package:movielicious/src/features/movies/domain/models/movie.dart';
 import 'package:movielicious/src/features/movies/presentation/widgets/rating_box.dart';
 
 class MovieTile extends StatelessWidget {
@@ -15,7 +15,7 @@ class MovieTile extends StatelessWidget {
     this.verticalMargin = 0,
   });
 
-  final MovieWithGenre movie;
+  final Movie movie;
   final double horizontalMargin;
   final double verticalMargin;
   final bool withTitle;

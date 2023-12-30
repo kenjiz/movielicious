@@ -1,10 +1,10 @@
-import 'dart:convert';
+import 'package:equatable/equatable.dart';
 
-import 'package:movielicious/src/features/movies/domain/models/movie_with_genre.dart';
+import 'package:movielicious/src/features/movies/domain/models/movie.dart';
 
-class MoviePage {
+class MoviePage extends Equatable {
   final int page;
-  final List<MovieWithGenre> results;
+  final List<Movie> results;
   final int totalPages;
   final int totalResults;
 
@@ -15,25 +15,11 @@ class MoviePage {
     required this.totalResults,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'page': page,
-      'results': results.map((x) => x.toMap()).toList(),
-      'totalPages': totalPages,
-      'totalResults': totalResults,
-    };
-  }
-
-  factory MoviePage.fromMap(Map<String, dynamic> map) {
-    return MoviePage(
-      page: map['page']?.toInt() ?? 0,
-      results: List<MovieWithGenre>.from(map['results']?.map((x) => MovieWithGenre.fromMap(x))),
-      totalPages: map['totalPages']?.toInt() ?? 0,
-      totalResults: map['totalResults']?.toInt() ?? 0,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory MoviePage.fromJson(String source) => MoviePage.fromMap(json.decode(source));
+  @override
+  List<Object> get props => [
+        page,
+        results,
+        totalPages,
+        totalResults,
+      ];
 }
