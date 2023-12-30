@@ -8,8 +8,8 @@ import 'package:movielicious/src/features/movies/application/movie_service.dart'
 import 'package:movielicious/src/features/movies/data/movie_repository.dart';
 import 'package:movielicious/src/features/movies/presentation/cubit/movies_cubit.dart';
 
-class InjectionContainer {
-  const InjectionContainer._();
+class DI {
+  const DI._();
 
   static final sl = GetIt.instance;
 

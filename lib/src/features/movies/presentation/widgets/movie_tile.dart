@@ -90,7 +90,7 @@ class MovieTile extends StatelessWidget {
           right: 10,
           top: 10,
           child: RatingBox(
-            rating: movie.voteAverage.toStringAsPrecision(2),
+            rating: movie.vote.toStringAsPrecision(2),
           ),
         )
       ],
