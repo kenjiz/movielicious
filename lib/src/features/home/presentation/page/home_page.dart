@@ -9,18 +9,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: CustomScrollView(
-          slivers: [
-            const PopularMovieAppBar(),
-            _buildUpcomingMovieList(),
-            // _buildGenreList(),
-            _buildPopularMovieList(),
-            _buildTopRatedMovieList(),
-          ],
-        ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: CustomScrollView(
+        slivers: [
+          const PopularMovieAppBar(),
+          _buildUpcomingMovieList(),
+          // _buildGenreList(),
+          _buildPopularMovieList(),
+          _buildTopRatedMovieList(),
+        ],
       ),
     );
   }

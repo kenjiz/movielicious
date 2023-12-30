@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movielicious/src/features/home/presentation/page/home_page2.dart';
 
 import 'src/core/bloc_providers.dart';
 import 'src/core/themes/theme.dart';
 import 'src/injection_container.dart';
-import 'src/features/home/presentation/page/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await dotenv.load(fileName: 'assets/.env');
-  await InjectionContainer.init();
+  await DI.init();
 
   runApp(const MyApp());
 }
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: darkTheme,
       title: 'Movielicious',
       home: AppBlocProviders(
-        child: const HomePage(),
+        child: const HomePage2(),
       ).initialize,
     );
   }

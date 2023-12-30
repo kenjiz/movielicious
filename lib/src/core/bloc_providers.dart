@@ -13,13 +13,16 @@ class AppBlocProviders {
 
   List<BlocProvider> _providerList() => [
         BlocProvider<PopularMoviesCubit>(
-          create: (context) => InjectionContainer.sl<PopularMoviesCubit>(),
+          create: (context) => DI.sl<PopularMoviesCubit>(),
         ),
         BlocProvider<UpcomingMoviesCubit>(
-          create: (context) => InjectionContainer.sl<UpcomingMoviesCubit>(),
+          create: (context) => DI.sl<UpcomingMoviesCubit>(),
         ),
         BlocProvider<TopRatedMoviesCubit>(
-          create: (context) => InjectionContainer.sl<TopRatedMoviesCubit>(),
+          create: (context) => DI.sl<TopRatedMoviesCubit>(),
+        ),
+        BlocProvider<NowPlayingMoviesCubit>(
+          create: (context) => DI.sl<NowPlayingMoviesCubit>(),
         ),
       ];
 
