@@ -15,7 +15,7 @@ const genreList = [
   Genre(id: 10402, name: 'Music'),
   Genre(id: 9648, name: 'Mystery'),
   Genre(id: 10749, name: 'Romance'),
-  Genre(id: 878, name: 'Science Fiction'),
+  Genre(id: 878, name: 'SciFi'),
   Genre(id: 10770, name: 'TV Movie'),
   Genre(id: 53, name: 'Thriller'),
   Genre(id: 10752, name: 'War'),

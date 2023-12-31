@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movielicious/src/features/home/presentation/page/home_page2.dart';
+import 'package:movielicious/src/features/home/presentation/page/home_page.dart';
 
 import 'src/core/bloc_providers.dart';
 import 'src/core/themes/theme.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: darkTheme,
       title: 'Movielicious',
       home: AppBlocProviders(
-        child: const HomePage2(),
+        child: const HomePage(),
       ).initialize,
     );
   }
