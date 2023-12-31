@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: darkTheme,
       title: 'Movielicious',
       home: AppBlocProviders(
-        child: const HomePage2(),
+        child: const HomePage(),
       ).initialize,
     );
   }
