@@ -6,12 +6,10 @@ class HorizontalMovieListContainer extends StatelessWidget {
     super.key,
     required this.title,
     required this.list,
-    this.height,
   });
 
   final String title;
   final Widget list;
-  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +20,21 @@ class HorizontalMovieListContainer extends StatelessWidget {
           margin: const EdgeInsets.symmetric(
             horizontal: kAppHorizontalMargin,
           ),
-          child: Text(
-            title,
-            style: kTextStyleHeading4,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: kTextStyleHeading4,
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'View All',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(color: kAccentColor),
+                ),
+              ),
+            ],
           ),
         ),
         const SizedBox(height: kAppTitleMargin),

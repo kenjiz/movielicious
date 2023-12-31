@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: kAppHorizontalMargin),
       child: LimitedBox(
-        maxHeight: 250,
+        maxHeight: 300,
         child: HorizontalMovieListContainer(
           title: title,
           list: widgetList,

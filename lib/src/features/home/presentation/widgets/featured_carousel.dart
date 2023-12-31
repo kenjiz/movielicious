@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movielicious/src/core/constants/http_constants.dart';
+import 'package:movielicious/src/core/widgets/adaptive_progress_indicator.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie.dart';
 import 'package:movielicious/src/features/movies/presentation/cubit/movies_cubit.dart';
 import 'package:movielicious/src/features/movies/presentation/widgets/movie_title.dart';
@@ -16,9 +17,7 @@ class FeaturedCarousel extends StatelessWidget {
       builder: (context, state) {
         return switch (state) {
           MoviesLoading() => const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
-              ),
+              child: AdaptiveProgressIndicator(),
             ),
           MoviesLoaded(movies: var items) when items.isNotEmpty => CarouselSlider(
               options: CarouselOptions(
@@ -54,7 +53,7 @@ class FeaturedCarousel extends StatelessWidget {
                       final totalBytes = loadingProgress?.expectedTotalBytes ?? 0;
                       final bytesLoaded = loadingProgress?.cumulativeBytesLoaded ?? 0;
                       return Center(
-                        child: bytesLoaded < totalBytes ? const CircularProgressIndicator(color: Colors.white) : child,
+                        child: bytesLoaded < totalBytes ? const AdaptiveProgressIndicator() : child,
                       );
                     },
                     fit: BoxFit.cover,
