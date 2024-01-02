@@ -41,12 +41,12 @@ abstract class BaseMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   ) async {
     final FutureEitherMoviePage result = fetchMovies(event);
 
-    result.match(
-      (error) => _onApiRequestError(error, emit),
-      (response) => _onApiRequestSuccess(response, emit),
-    );
-
-    await result.run();
+    await result
+        .match(
+          (error) => _onApiRequestError(error, emit),
+          (response) => _onApiRequestSuccess(response, emit),
+        )
+        .run();
   }
 
   _onApiRequestError(
