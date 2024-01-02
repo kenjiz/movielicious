@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:movielicious/src/core/constants/theme_constants.dart';
 import 'package:movielicious/src/core/widgets/custom_appbar.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/base_movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/movies_bloc.dart';
 import 'package:movielicious/src/features/movies/presentation/widgets/horizontal_movie_list_container.dart';
-
 import 'package:movielicious/src/features/home/presentation/widgets/featured_carousel.dart';
 import 'package:movielicious/src/features/home/presentation/widgets/home_header.dart';
-import 'package:movielicious/src/features/home/presentation/widgets/movie_list.dart';
-import 'package:movielicious/src/features/movies/presentation/cubit/movies_cubit.dart';
+import 'package:movielicious/src/features/movies/presentation/widgets/movie_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -34,6 +35,7 @@ class HomePage extends StatelessWidget {
                 _buildPopularMovieList(),
                 _buildUpcomingMovieList(),
                 _buildTopRatedMovieList(),
+                const SizedBox(height: kAppWidgetMargin),
               ],
             ),
           );
@@ -42,15 +44,17 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildPoster({
+  Widget _buildPoster<B extends BaseMoviesBloc>({
     required String title,
     required Widget widgetList,
   }) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: kAppHorizontalMargin),
+      margin: const EdgeInsets.symmetric(
+        vertical: kAppHorizontalMargin,
+      ),
       child: LimitedBox(
-        maxHeight: 250,
-        child: HorizontalMovieListContainer(
+        maxHeight: 300,
+        child: HorizontalMovieListContainer<B>(
           title: title,
           list: widgetList,
         ),
@@ -59,23 +63,23 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildUpcomingMovieList() {
-    return _buildPoster(
+    return _buildPoster<UpcomingMoviesBloc>(
       title: 'Upcoming Movies',
-      widgetList: const MovieList<UpcomingMoviesCubit>(),
+      widgetList: const MovieList<UpcomingMoviesBloc>(),
     );
   }
 
   Widget _buildTopRatedMovieList() {
-    return _buildPoster(
+    return _buildPoster<TopRatedMoviesBloc>(
       title: 'Top Rated Movies',
-      widgetList: const MovieList<TopRatedMoviesCubit>(),
+      widgetList: const MovieList<TopRatedMoviesBloc>(),
     );
   }
 
   Widget _buildPopularMovieList() {
-    return _buildPoster(
+    return _buildPoster<PopularMoviesBloc>(
       title: 'Popular Movies',
-      widgetList: const MovieList<PopularMoviesCubit>(),
+      widgetList: const MovieList<PopularMoviesBloc>(),
     );
   }
 }

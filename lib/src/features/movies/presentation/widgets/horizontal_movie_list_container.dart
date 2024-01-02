@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:movielicious/src/core/constants/theme_constants.dart';
 
-class HorizontalMovieListContainer extends StatelessWidget {
+import 'package:movielicious/src/core/constants/theme_constants.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/base_movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/pages/movie_listing_page.dart';
+
+class HorizontalMovieListContainer<B extends BaseMoviesBloc> extends StatelessWidget {
   const HorizontalMovieListContainer({
     super.key,
     required this.title,
     required this.list,
-    this.height,
   });
 
   final String title;
   final Widget list;
-  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +23,31 @@ class HorizontalMovieListContainer extends StatelessWidget {
           margin: const EdgeInsets.symmetric(
             horizontal: kAppHorizontalMargin,
           ),
-          child: Text(
-            title,
-            style: kTextStyleHeading4,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: kTextStyleHeading4,
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MovieListingPage<B>(
+                        title: title,
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  'See All',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: kAccentColor,
+                      ),
+                ),
+              ),
+            ],
           ),
         ),
         const SizedBox(height: kAppTitleMargin),

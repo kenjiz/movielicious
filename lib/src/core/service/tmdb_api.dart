@@ -1,8 +1,8 @@
-import 'package:movielicious/src/features/movies/domain/models/movie_queries.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie_response.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
+import 'package:movielicious/src/features/movies/domain/models/movie_queries.dart';
+import 'package:movielicious/src/features/movies/domain/models/movie_response.dart';
 import 'package:movielicious/src/core/constants/http_constants.dart';
 
 part 'tmdb_api.g.dart';

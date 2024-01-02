@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movielicious/src/core/constants/http_constants.dart';
+import 'package:movielicious/src/core/widgets/adaptive_progress_indicator.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie.dart';
-import 'package:movielicious/src/features/movies/presentation/cubit/movies_cubit.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/base_movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/movies_bloc.dart';
 import 'package:movielicious/src/features/movies/presentation/widgets/movie_title.dart';
 
 class FeaturedCarousel extends StatelessWidget {
@@ -12,24 +14,25 @@ class FeaturedCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NowPlayingMoviesCubit, MoviesState>(
+    return BlocBuilder<NowPlayingMoviesBloc, MoviesState>(
       builder: (context, state) {
-        return switch (state) {
-          MoviesLoading() => const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
-              ),
+        return switch (state.status) {
+          MoviesStateStatus.loading => const Center(
+              child: AdaptiveProgressIndicator(),
             ),
-          MoviesLoaded(movies: var items) when items.isNotEmpty => CarouselSlider(
-              options: CarouselOptions(
-                autoPlay: true,
-                aspectRatio: 16 / 9,
-                enlargeCenterPage: true,
-              ),
-              items: _imageSliders(context, state.movies),
+          MoviesStateStatus.success => state.movies.isNotEmpty
+              ? CarouselSlider(
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    aspectRatio: 16 / 9,
+                    enlargeCenterPage: true,
+                  ),
+                  items: _imageSliders(context, state.movies),
+                )
+              : const Center(child: Text('Empty Movies..')),
+          MoviesStateStatus.failure => Center(
+              child: Text(state.error!.errorMessage),
             ),
-          MoviesLoaded() => const Center(child: Text('Empty Movies..')),
-          MoviesFailure(:var message) => Center(child: Text(message))
         };
       },
     );
@@ -54,7 +57,7 @@ class FeaturedCarousel extends StatelessWidget {
                       final totalBytes = loadingProgress?.expectedTotalBytes ?? 0;
                       final bytesLoaded = loadingProgress?.cumulativeBytesLoaded ?? 0;
                       return Center(
-                        child: bytesLoaded < totalBytes ? const CircularProgressIndicator(color: Colors.white) : child,
+                        child: bytesLoaded < totalBytes ? const AdaptiveProgressIndicator() : child,
                       );
                     },
                     fit: BoxFit.cover,

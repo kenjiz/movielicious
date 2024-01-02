@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:movielicious/src/core/constants/theme_constants.dart';
 
 class HomeHeader extends StatelessWidget {

@@ -3,10 +3,10 @@ import 'package:movielicious/src/features/genres/domain/models/genre.dart';
 const genreList = [
   Genre(id: 28, name: 'Action'),
   Genre(id: 12, name: 'Adventure'),
-  Genre(id: 16, name: 'Animation'),
+  Genre(id: 16, name: '3D'),
   Genre(id: 35, name: 'Comedy'),
   Genre(id: 80, name: 'Crime'),
-  Genre(id: 99, name: 'Documentary'),
+  Genre(id: 99, name: 'Docu'),
   Genre(id: 18, name: 'Drama'),
   Genre(id: 10751, name: 'Family'),
   Genre(id: 14, name: 'Fantasy'),

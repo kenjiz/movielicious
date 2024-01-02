@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 class MovieQueries extends Equatable {
   final int? page;
@@ -25,4 +26,7 @@ class MovieQueries extends Equatable {
 
   @override
   List<Object?> get props => [page, language];
+
+  @override
+  bool? get stringify => kDebugMode;
 }

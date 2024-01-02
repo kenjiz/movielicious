@@ -8,6 +8,7 @@ const double kAppTitleMargin = 20;
 const double kAppHorizontalMargin = 20;
 const double kAppVerticalMargin = 50;
 const double kAppWidgetListBottomMargin = 15;
+const double kAppBodyMargin = 10;
 
 // Padding
 const double kAppWidgetPadding = 15;

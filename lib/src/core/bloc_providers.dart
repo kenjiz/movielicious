@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movielicious/src/features/movies/presentation/cubit/movies_cubit.dart';
 
-import '../injection_container.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/movies_bloc.dart';
+import 'package:movielicious/src/injection_container.dart';
 
 class AppBlocProviders {
   final Widget child;
@@ -12,17 +12,17 @@ class AppBlocProviders {
   });
 
   List<BlocProvider> _providerList() => [
-        BlocProvider<PopularMoviesCubit>(
-          create: (context) => DI.sl<PopularMoviesCubit>(),
+        BlocProvider<PopularMoviesBloc>(
+          create: (context) => DI.sl<PopularMoviesBloc>(),
         ),
-        BlocProvider<UpcomingMoviesCubit>(
-          create: (context) => DI.sl<UpcomingMoviesCubit>(),
+        BlocProvider<UpcomingMoviesBloc>(
+          create: (context) => DI.sl<UpcomingMoviesBloc>(),
         ),
-        BlocProvider<TopRatedMoviesCubit>(
-          create: (context) => DI.sl<TopRatedMoviesCubit>(),
+        BlocProvider<TopRatedMoviesBloc>(
+          create: (context) => DI.sl<TopRatedMoviesBloc>(),
         ),
-        BlocProvider<NowPlayingMoviesCubit>(
-          create: (context) => DI.sl<NowPlayingMoviesCubit>(),
+        BlocProvider<NowPlayingMoviesBloc>(
+          create: (context) => DI.sl<NowPlayingMoviesBloc>(),
         ),
       ];
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:movielicious/src/features/movies/domain/models/raw_movie.dart';
 
@@ -41,4 +42,7 @@ class MovieResponse extends Equatable {
 
   @override
   List<Object> get props => [page, results, totalPages, totalResults];
+
+  @override
+  bool? get stringify => kDebugMode;
 }

@@ -33,7 +33,6 @@ class HorizontalMovieList extends StatelessWidget {
               width: size.width / 3,
               child: MovieTile(
                 movie: movies[index],
-                withTitle: false,
               ),
             ),
           );

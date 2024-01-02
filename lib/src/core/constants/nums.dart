@@ -1,1 +1,0 @@
-const kDefaultPageSize = 20;
