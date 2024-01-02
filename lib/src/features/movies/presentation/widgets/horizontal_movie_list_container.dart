@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movielicious/src/core/constants/theme_constants.dart';
 
-class HorizontalMovieListContainer extends StatelessWidget {
+import 'package:movielicious/src/core/constants/theme_constants.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/base_movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/pages/movie_listing_page.dart';
+
+class HorizontalMovieListContainer<B extends BaseMoviesBloc> extends StatelessWidget {
   const HorizontalMovieListContainer({
     super.key,
     required this.title,
@@ -28,10 +31,20 @@ class HorizontalMovieListContainer extends StatelessWidget {
                 style: kTextStyleHeading4,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MovieListingPage<B>(
+                        title: title,
+                      ),
+                    ),
+                  );
+                },
                 child: Text(
-                  'View All',
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(color: kAccentColor),
+                  'See All',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: kAccentColor,
+                      ),
                 ),
               ),
             ],

@@ -8,3 +8,5 @@ const kSearchPath = '/search/movie';
 const kGenrePath = '/genre/movie/list';
 const kCreditPath = '/credits';
 const kReviewPath = '/reviews';
+
+const kListLimit = 20; // it's fixed at 20

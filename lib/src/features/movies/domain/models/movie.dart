@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:movielicious/src/core/constants/http_constants.dart';
 import 'package:movielicious/src/features/genres/domain/models/genre.dart';
@@ -37,7 +38,6 @@ class Movie extends Equatable {
   String get fullPosterPath => kBaseImagePath + fullBackdropPath;
 
   /// get genre
-  /// TODO: Get actual genre name
   String get genresByName => genres.getRange(0, 1).map((genre) => genre.name).join('/');
 
   @override
@@ -53,4 +53,7 @@ class Movie extends Equatable {
       vote,
     ];
   }
+
+  @override
+  bool? get stringify => kDebugMode;
 }

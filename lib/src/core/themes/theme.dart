@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/theme_constants.dart';
-
-// Constants
+import 'package:movielicious/src/core/constants/theme_constants.dart';
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,

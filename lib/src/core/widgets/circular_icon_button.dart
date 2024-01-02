@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class CircularIconButton extends StatelessWidget {
   const CircularIconButton({
-    Key? key,
+    super.key,
     this.icon = Icons.arrow_forward,
     this.text = 'View More',
     this.size = 100,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   final IconData icon;
   final String text;

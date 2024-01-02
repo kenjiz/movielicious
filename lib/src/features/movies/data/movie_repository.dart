@@ -45,11 +45,13 @@ class MovieRepository extends BaseApiRepository {
       );
     }).toList();
 
-    return TaskEither.of(MoviePage(
-      page: response.page,
-      results: results,
-      totalPages: response.totalPages,
-      totalResults: response.totalResults,
-    ));
+    return TaskEither.right(
+      MoviePage(
+        page: response.page,
+        results: results,
+        totalPages: response.totalPages,
+        totalResults: response.totalResults,
+      ),
+    );
   }
 }

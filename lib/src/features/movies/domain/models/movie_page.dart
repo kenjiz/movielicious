@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:movielicious/src/features/movies/domain/models/movie.dart';
 
@@ -22,4 +23,7 @@ class MoviePage extends Equatable {
         totalPages,
         totalResults,
       ];
+
+  @override
+  bool? get stringify => kDebugMode;
 }

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
+
 import 'package:movielicious/src/features/errors/domain/models/api_request_error.dart';
 
 abstract class BaseApiRepository {
