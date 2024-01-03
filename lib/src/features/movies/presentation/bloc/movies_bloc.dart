@@ -6,6 +6,7 @@ class PopularMoviesBloc extends BaseMoviesBloc {
     add(const MovieListFetched(category: MovieCategory.popular));
   }
 
+  @override
   void fetchNext() {
     next(MovieCategory.popular);
   }
@@ -16,6 +17,7 @@ class UpcomingMoviesBloc extends BaseMoviesBloc {
     add(const MovieListFetched(category: MovieCategory.upcoming));
   }
 
+  @override
   void fetchNext() {
     next(MovieCategory.upcoming);
   }
@@ -26,6 +28,7 @@ class TopRatedMoviesBloc extends BaseMoviesBloc {
     add(const MovieListFetched(category: MovieCategory.topRated));
   }
 
+  @override
   void fetchNext() {
     next(MovieCategory.topRated);
   }
@@ -36,6 +39,7 @@ class NowPlayingMoviesBloc extends BaseMoviesBloc {
     add(const MovieListFetched(category: MovieCategory.nowPlaying));
   }
 
+  @override
   void fetchNext() {
     next(MovieCategory.nowPlaying);
   }
