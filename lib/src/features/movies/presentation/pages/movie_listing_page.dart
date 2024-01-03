@@ -16,8 +16,6 @@ class MovieListingPage<B extends BaseMoviesBloc> extends StatelessWidget {
     required this.title,
   });
 
-  static const String route = 'movie-listing';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +25,7 @@ class MovieListingPage<B extends BaseMoviesBloc> extends StatelessWidget {
           builder: (context, state) => switch (state.status) {
             MoviesStateStatus.loading => const AdaptiveProgressIndicator(),
             MoviesStateStatus.failure => FailedMessage(message: state.error!.message),
-            MoviesStateStatus.success => VerticalMovieList(movies: state.movies),
+            MoviesStateStatus.success => VerticalMovieList<B>(movies: state.movies),
           },
         ),
       ).initialize,

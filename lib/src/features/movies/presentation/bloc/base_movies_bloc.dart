@@ -100,4 +100,6 @@ abstract class BaseMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     final query = MovieQueries(page: state.currentPage + 1);
     add(MovieListFetched(category: category, queries: query));
   }
+
+  void fetchNext();
 }
