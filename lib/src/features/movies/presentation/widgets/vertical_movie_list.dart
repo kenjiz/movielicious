@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movielicious/src/core/constants/theme_constants.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/base_movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
 import 'package:movielicious/src/features/movies/presentation/widgets/movie_tile.dart';
 
 class VerticalMovieList<B extends BaseMoviesBloc> extends StatefulWidget {

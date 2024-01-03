@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:movielicious/src/core/constants/theme_constants.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/base_movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
 import 'package:movielicious/src/features/movies/presentation/pages/movie_listing_page.dart';
 
 class HorizontalMovieListContainer<B extends BaseMoviesBloc> extends StatelessWidget {

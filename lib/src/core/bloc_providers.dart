@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/listings/movies_bloc.dart';
 
-import 'package:movielicious/src/features/movies/presentation/bloc/movies_bloc.dart';
 import 'package:movielicious/src/injection_container.dart';
 
 class AppBlocProviders {
