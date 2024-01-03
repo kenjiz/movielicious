@@ -5,7 +5,7 @@ import 'package:movielicious/src/core/bloc_providers.dart';
 import 'package:movielicious/src/core/widgets/adaptive_progress_indicator.dart';
 import 'package:movielicious/src/core/widgets/custom_appbar.dart';
 import 'package:movielicious/src/core/widgets/failed_message.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/base_movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
 import 'package:movielicious/src/features/movies/presentation/widgets/vertical_movie_list.dart';
 
 class MovieListingPage<B extends BaseMoviesBloc> extends StatelessWidget {

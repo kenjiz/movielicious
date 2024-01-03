@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:movielicious/src/core/constants/theme_constants.dart';
 import 'package:movielicious/src/core/widgets/custom_appbar.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/base_movies_bloc.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/listings/movies_bloc.dart';
 import 'package:movielicious/src/features/movies/presentation/widgets/horizontal_movie_list_container.dart';
 import 'package:movielicious/src/features/home/presentation/widgets/featured_carousel.dart';
 import 'package:movielicious/src/features/home/presentation/widgets/home_header.dart';

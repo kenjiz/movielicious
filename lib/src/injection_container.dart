@@ -6,7 +6,7 @@ import 'package:movielicious/src/core/constants/http_constants.dart';
 import 'package:movielicious/src/core/service/tmdb_api.dart';
 import 'package:movielicious/src/features/movies/application/movie_service.dart';
 import 'package:movielicious/src/features/movies/data/movie_repository.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/listings/movies_bloc.dart';
 
 class DI {
   const DI._();

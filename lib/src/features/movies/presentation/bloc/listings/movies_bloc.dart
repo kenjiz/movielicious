@@ -1,5 +1,5 @@
 import 'package:movielicious/src/features/movies/domain/enums/movie_category.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/base_movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
 
 class PopularMoviesBloc extends BaseMoviesBloc {
   PopularMoviesBloc(super.service) {

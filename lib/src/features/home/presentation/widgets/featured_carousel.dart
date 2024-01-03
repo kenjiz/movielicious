@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movielicious/src/core/constants/http_constants.dart';
 import 'package:movielicious/src/core/widgets/adaptive_progress_indicator.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/base_movies_bloc.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
+import 'package:movielicious/src/features/movies/presentation/bloc/listings/movies_bloc.dart';
 import 'package:movielicious/src/features/movies/presentation/widgets/movie_title.dart';
 
 class FeaturedCarousel extends StatelessWidget {
