@@ -19,7 +19,15 @@ class MovieListingPage<B extends BaseMoviesBloc> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: title),
+      appBar: CustomAppBar(
+        title: title,
+        actionButtons: [
+          IconButton(
+            icon: const Icon(Icons.search_outlined),
+            onPressed: () {},
+          )
+        ],
+      ),
       body: AppBlocProviders(
         child: BlocBuilder<B, MoviesState>(
           builder: (context, state) => switch (state.status) {
