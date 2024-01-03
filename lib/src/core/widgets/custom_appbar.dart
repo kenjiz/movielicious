@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
+  final List<Widget>? actionButtons;
 
   const CustomAppBar({
     super.key,
     this.title,
+    this.actionButtons,
   });
 
   @override
@@ -17,12 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       backgroundColor: Colors.transparent,
       centerTitle: false,
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.notifications_none_outlined),
-        ),
-      ],
+      actions: actionButtons,
     );
   }
 
