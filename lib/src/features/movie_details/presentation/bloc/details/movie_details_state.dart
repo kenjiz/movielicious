@@ -9,7 +9,7 @@ class MovieDetailsState extends Equatable {
 
   final Movie? movie;
   final MoviesStateStatus status;
-  final MovieError? error;
+  final MoviePageError? error;
 
   @override
   List<Object?> get props => [
@@ -21,7 +21,7 @@ class MovieDetailsState extends Equatable {
   MovieDetailsState copyWith({
     Movie? movie,
     MoviesStateStatus? status,
-    MovieError? error,
+    MoviePageError? error,
   }) {
     return MovieDetailsState(
       movie: movie ?? this.movie,

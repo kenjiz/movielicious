@@ -11,7 +11,7 @@ class MoviesState extends Equatable {
   final List<Movie> movies;
   final int currentPage;
   final bool hasReachedMax;
-  final MovieError? error;
+  final MoviePageError? error;
 
   const MoviesState({
     this.status = MoviesStateStatus.loading,
@@ -29,7 +29,7 @@ class MoviesState extends Equatable {
     List<Movie>? movies,
     int? currentPage,
     bool? hasReachedMax,
-    MovieError? error,
+    MoviePageError? error,
   }) {
     return MoviesState(
       status: status ?? this.status,

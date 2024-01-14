@@ -22,6 +22,4 @@ class MovieService {
   FutureEitherMoviePage getPopularMovies(MovieQueries? queries) {
     return _repository.getMovies(MovieCategory.popular, queries);
   }
-
-  
 }

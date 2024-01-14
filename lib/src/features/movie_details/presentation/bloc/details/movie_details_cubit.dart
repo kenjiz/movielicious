@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movielicious/src/features/movies/application/movie_service.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie_error.dart';
+import 'package:movielicious/src/features/movies/domain/models/movie_page_error.dart';
 import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
 
 part 'movie_details_state.dart';

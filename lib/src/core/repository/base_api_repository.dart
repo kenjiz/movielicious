@@ -27,4 +27,6 @@ abstract class BaseApiRepository {
       },
     );
   }
+
+  ApiRequestError transformError(ApiRequestError e);
 }

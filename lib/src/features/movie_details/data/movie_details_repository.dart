@@ -18,19 +18,24 @@ class MovieDetailsRepository extends BaseApiRepository {
   FutureEitherMovieDetails getMovieDetails(MovieId id) {
     return processRequest<MovieDetailsResponse>(
       request: () => _api.getMovieDetails(id),
-    ).flatMap<MovieDetails>(_toMovieDetails).mapLeft(_handleError);
+    ).flatMap<MovieDetails>(_toMovieDetails).mapLeft(transformError);
   }
 
+  // map to [MovieDetails]
   FutureEitherMovieDetails _toMovieDetails(MovieDetailsResponse response) {
     return TaskEither.right(MovieDetails.mapper(response));
   }
 
-  MovieDetailsError _handleError(ApiRequestError e) {
+  @override
+  MovieDetailsError transformError(ApiRequestError e) {
     return MovieDetailsError(message: e.error.toString());
   }
 
   /// Same as getMovieDetails but using Do notation
-  FutureEitherMovieDetails getDetails(MovieId id) => TaskEither<ApiRequestError, MovieDetailsResponse>.Do(
-        ($) => $(processRequest<MovieDetailsResponse>(request: () => _api.getMovieDetails(id))),
-      ).flatMap<MovieDetails>(_toMovieDetails).mapLeft(_handleError);
+  /// this is just for reference only.
+  FutureEitherMovieDetails getDetails(MovieId id) =>
+      TaskEither<ApiRequestError, MovieDetailsResponse>.Do(
+        ($) => $(processRequest<MovieDetailsResponse>(
+            request: () => _api.getMovieDetails(id))),
+      ).flatMap<MovieDetails>(_toMovieDetails).mapLeft(transformError);
 }

@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 
 import 'package:movielicious/src/features/errors/domain/models/api_request_error.dart';
 
-class MovieError extends ApiRequestError {
+class MoviePageError extends ApiRequestError {
   final String message;
 
-  MovieError({
+  MoviePageError({
     required this.message,
   });
 

@@ -25,21 +25,6 @@ class Movie extends Equatable {
     required this.vote,
   });
 
-  /// Get only the year
-  String get getYear => year.split('-')[0];
-
-  /// vote
-  String get getVote => vote.toStringAsFixed(1);
-
-  /// backdrop
-  String get fullBackdropPath => kBaseImagePath + backdropPath;
-
-  /// poster
-  String get fullPosterPath => kBaseImagePath + fullBackdropPath;
-
-  /// get genre
-  String get genresByName => genres.getRange(0, 1).map((genre) => genre.name).join('/');
-
   @override
   List<Object> get props {
     return [
@@ -56,4 +41,22 @@ class Movie extends Equatable {
 
   @override
   bool? get stringify => kDebugMode;
+}
+
+extension MovieUtils on Movie {
+  /// Get only the year
+  String get getYear => year.split('-')[0];
+
+  /// vote
+  String get getVote => vote.toStringAsFixed(1);
+
+  /// backdrop
+  String get fullBackdropPath => kBaseImagePath + backdropPath;
+
+  /// poster
+  String get fullPosterPath => kBaseImagePath + fullBackdropPath;
+
+  /// get genre
+  String get genresByName =>
+      genres.getRange(0, 1).map((genre) => genre.name).join('/');
 }
