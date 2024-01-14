@@ -1,5 +1,7 @@
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
+import 'package:movielicious/src/core/typdefs/movie_id.dart';
+import 'package:movielicious/src/features/movie_details/domain/models/movie_details_response.dart';
 
 import 'package:movielicious/src/features/movies/domain/models/movie_queries.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie_response.dart';
@@ -20,6 +22,16 @@ abstract class TMDBApi {
     @Path('category') String category, {
     @Queries() MovieQueries? queries,
   });
+
+  /// Calls the https://api.themoviedb.org/3/movie/{movieId} endpoint.
+  /// Takes the property value of [MovieId] and
+  /// returns a [MovieDetailsResponse].
+  /// Throws a [DioException] for all error codes.
+  @GET('/movie/{movieId}')
+  Future<MovieDetailsResponse> getMovieDetails(
+    @Path('movieId') MovieId id,
+  );
+
 /*
   /// Calls the https://api.themoviedb.org/3/discover/movie=with_genres{genreIds} endpoint.
   /// Takes the property value of [GenreQueries] and

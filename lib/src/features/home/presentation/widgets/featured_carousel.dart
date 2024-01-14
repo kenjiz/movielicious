@@ -31,7 +31,7 @@ class FeaturedCarousel extends StatelessWidget {
                 )
               : const Center(child: Text('Empty Movies..')),
           MoviesStateStatus.failure => Center(
-              child: Text(state.error!.errorMessage),
+              child: Text(state.error!.message),
             ),
         };
       },

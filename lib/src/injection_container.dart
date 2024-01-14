@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 
 import 'package:movielicious/src/core/constants/http_constants.dart';
 import 'package:movielicious/src/core/service/tmdb_api.dart';
+import 'package:movielicious/src/features/movie_details/presentation/bloc/details/movie_details_cubit.dart';
 import 'package:movielicious/src/features/movies/application/movie_service.dart';
 import 'package:movielicious/src/features/movies/data/movie_repository.dart';
 import 'package:movielicious/src/features/movies/presentation/bloc/listings/movies_bloc.dart';
@@ -20,6 +21,7 @@ class DI {
       ..registerFactory(() => TopRatedMoviesBloc(sl()))
       ..registerFactory(() => NowPlayingMoviesBloc(sl()))
       ..registerFactory(() => PopularMoviesBloc(sl()))
+      ..registerFactory(() => MovieDetailsCubit(sl()))
 
       //* Application Service
       ..registerLazySingleton<MovieService>(

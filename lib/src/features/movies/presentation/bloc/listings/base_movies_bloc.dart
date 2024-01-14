@@ -56,7 +56,7 @@ abstract class BaseMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
       emit(state.copyWith(
         status: MoviesStateStatus.failure,
         error: MovieError(
-          errorMessage: error.message,
+          message: 'Failed to get movies.',
         ),
       ));
 
