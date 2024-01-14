@@ -2,14 +2,12 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fpdart/fpdart.dart';
 
-import 'package:movielicious/src/features/errors/domain/models/api_request_error.dart';
 import 'package:movielicious/src/features/movies/application/movie_service.dart';
 import 'package:movielicious/src/features/movies/data/movie_repository.dart';
 import 'package:movielicious/src/features/movies/domain/enums/movie_category.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie_error.dart';
+import 'package:movielicious/src/features/movies/domain/models/movie_page_error.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie_page.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie_queries.dart';
 
@@ -43,57 +41,44 @@ abstract class BaseMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
 
     await result
         .match(
-          (error) => _onApiRequestError(error, emit),
-          (response) => _onApiRequestSuccess(response, emit),
+          (error) => _onMoviePageError(error, emit),
+          (response) => _onMoviePageFetched(response, emit),
         )
         .run();
   }
 
-  _onApiRequestError(
-    ApiRequestError error,
-    Emitter<MoviesState> emit,
-  ) =>
-      emit(state.copyWith(
-        status: MoviesStateStatus.failure,
-        error: MovieError(
-          errorMessage: error.message,
+  _onMoviePageError(MoviePageError error, Emitter<MoviesState> emit) => emit(
+        state.copyWith(
+          status: MoviesStateStatus.failure,
+          error: MoviePageError(
+            message: 'Failed to get movies.',
+          ),
         ),
-      ));
+      );
 
-  _onApiRequestSuccess(
-    MoviePage response,
-    Emitter<MoviesState> emit,
-  ) =>
+  _onMoviePageFetched(MoviePage response, Emitter<MoviesState> emit) =>
       state.currentPage < response.totalPages
-          ? emit(state.copyWith(
-              status: MoviesStateStatus.success,
-              movies: List.of(state.movies)..addAll(response.results),
-              currentPage: response.page,
-              hasReachedMax: false,
-            ))
-          : emit(state.copyWith(
-              hasReachedMax: true,
-            ));
+          ? emit(
+              state.copyWith(
+                status: MoviesStateStatus.success,
+                movies: List.of(state.movies)..addAll(response.results),
+                currentPage: response.page,
+                hasReachedMax: false,
+              ),
+            )
+          : emit(
+              state.copyWith(
+                hasReachedMax: true,
+              ),
+            );
 
-  TaskEither<ApiRequestError, MoviePage> fetchMovies(MovieListFetched event) {
-    late FutureEitherMoviePage result;
-
-    switch (event.category) {
-      case MovieCategory.nowPlaying:
-        result = _service.getNowPlayingMovies(event.queries);
-        break;
-      case MovieCategory.topRated:
-        result = _service.getTopRatedMovies(event.queries);
-        break;
-      case MovieCategory.popular:
-        result = _service.getPopularMovies(event.queries);
-        break;
-      case MovieCategory.upcoming:
-        result = _service.getUpcomingMovies(event.queries);
-        break;
-    }
-
-    return result;
+  FutureEitherMoviePage fetchMovies(MovieListFetched event) {
+    return switch (event.category) {
+      MovieCategory.nowPlaying => _service.getNowPlayingMovies(event.queries),
+      MovieCategory.topRated => _service.getTopRatedMovies(event.queries),
+      MovieCategory.popular => _service.getPopularMovies(event.queries),
+      MovieCategory.upcoming => _service.getUpcomingMovies(event.queries),
+    };
   }
 
   void next(MovieCategory category) {

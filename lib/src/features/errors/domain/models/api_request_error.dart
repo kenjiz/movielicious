@@ -12,9 +12,6 @@ class ApiRequestError implements RequestError {
   });
 
   @override
-  String get message => 'Api request error.';
-
-  @override
   List<Object?> get props => [error, stackTrace];
 
   @override

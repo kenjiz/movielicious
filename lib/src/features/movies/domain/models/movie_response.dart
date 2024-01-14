@@ -1,48 +1,53 @@
 import 'dart:convert';
 
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+class MovieResponse {
+  final int id;
+  final List<int> genres;
+  final String backdropPath;
+  final String posterPath;
+  final String title;
+  final String overview;
+  final String year;
+  final double vote;
 
-import 'package:movielicious/src/features/movies/domain/models/raw_movie.dart';
-
-class MovieResponse extends Equatable {
-  final int page;
-  final List<RawMovie> results;
-  final int totalPages;
-  final int totalResults;
-
-  const MovieResponse({
-    required this.page,
-    required this.results,
-    required this.totalPages,
-    required this.totalResults,
+  MovieResponse({
+    required this.id,
+    required this.genres,
+    required this.backdropPath,
+    required this.posterPath,
+    required this.title,
+    required this.overview,
+    required this.year,
+    required this.vote,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'page': page,
-      'results': results.map((x) => x.toMap()).toList(),
-      'total_pages': totalPages,
-      'total_results': totalResults,
+      'id': id,
+      'genre_ids': genres,
+      'backdrop_path': backdropPath,
+      'poster_path': posterPath,
+      'title': title,
+      'overview': overview,
+      'release_date': year,
+      'vote_average': vote,
     };
   }
 
   factory MovieResponse.fromMap(Map<String, dynamic> map) {
     return MovieResponse(
-      page: map['page']?.toInt() ?? 0,
-      results: List<RawMovie>.from(map['results']?.map((x) => RawMovie.fromMap(x))),
-      totalPages: map['total_pages']?.toInt() ?? 0,
-      totalResults: map['total_results']?.toInt() ?? 0,
+      id: map['id']?.toInt() ?? 0,
+      genres: List<int>.from(map['genre_ids']),
+      backdropPath: map['backdrop_path'] ?? '',
+      posterPath: map['poster_path'] ?? '',
+      title: map['title'] ?? '',
+      overview: map['overview'] ?? '',
+      year: map['release_date'] ?? '',
+      vote: map['vote_average'] ?? 0,
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory MovieResponse.fromJson(String source) => MovieResponse.fromMap(json.decode(source));
-
-  @override
-  List<Object> get props => [page, results, totalPages, totalResults];
-
-  @override
-  bool? get stringify => kDebugMode;
 }

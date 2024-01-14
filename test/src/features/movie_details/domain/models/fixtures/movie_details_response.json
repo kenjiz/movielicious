@@ -1,0 +1,50 @@
+{
+    "adult": false,
+    "backdrop_path": "backdrop_path",
+    "belongs_to_collection": null,
+    "budget": 0,
+    "genres": [
+        {
+            "id": 28,
+            "name": "Action"
+        }
+    ],
+    "homepage": "homepage",
+    "id": 1,
+    "imdb_id": "imdb_id",
+    "original_language": "original_language",
+    "original_title": "original_title",
+    "overview": "overview",
+    "popularity": 1,
+    "poster_path": "poster_path",
+    "production_companies": [
+        {
+            "id": 1,
+            "logo_path": "logo_path",
+            "name": "name",
+            "origin_country": "origin_country"
+        }
+    ],
+    "production_countries": [
+        {
+            "iso_3166_1": "iso_3166_1",
+            "name": "name"
+        }
+    ],
+    "release_date": "2023-01-01",
+    "revenue": 1,
+    "runtime": 119,
+    "spoken_languages": [
+        {
+            "english_name": "english_name",
+            "iso_639_1": "iso_639_1",
+            "name": "name"
+        }
+    ],
+    "status": "status",
+    "tagline": "tagline",
+    "title": "title",
+    "video": false,
+    "vote_average": 1.1,
+    "vote_count": 1
+}
