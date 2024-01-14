@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movielicious/src/core/constants/http_constants.dart';
+import 'package:movielicious/src/core/enums/state_status.dart';
 import 'package:movielicious/src/core/widgets/adaptive_progress_indicator.dart';
 import 'package:movielicious/src/features/movies/domain/models/movie.dart';
 import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
@@ -17,10 +18,10 @@ class FeaturedCarousel extends StatelessWidget {
     return BlocBuilder<NowPlayingMoviesBloc, MoviesState>(
       builder: (context, state) {
         return switch (state.status) {
-          MoviesStateStatus.loading => const Center(
+          StateStatus.loading => const Center(
               child: AdaptiveProgressIndicator(),
             ),
-          MoviesStateStatus.success => state.movies.isNotEmpty
+          StateStatus.success => state.movies.isNotEmpty
               ? CarouselSlider(
                   options: CarouselOptions(
                     autoPlay: true,
@@ -30,7 +31,7 @@ class FeaturedCarousel extends StatelessWidget {
                   items: _imageSliders(context, state.movies),
                 )
               : const Center(child: Text('Empty Movies..')),
-          MoviesStateStatus.failure => Center(
+          StateStatus.failure => Center(
               child: Text(state.error!.message),
             ),
         };
@@ -54,10 +55,14 @@ class FeaturedCarousel extends StatelessWidget {
                   Image.network(
                     kBaseImagePath + movie.posterPath,
                     loadingBuilder: (context, child, loadingProgress) {
-                      final totalBytes = loadingProgress?.expectedTotalBytes ?? 0;
-                      final bytesLoaded = loadingProgress?.cumulativeBytesLoaded ?? 0;
+                      final totalBytes =
+                          loadingProgress?.expectedTotalBytes ?? 0;
+                      final bytesLoaded =
+                          loadingProgress?.cumulativeBytesLoaded ?? 0;
                       return Center(
-                        child: bytesLoaded < totalBytes ? const AdaptiveProgressIndicator() : child,
+                        child: bytesLoaded < totalBytes
+                            ? const AdaptiveProgressIndicator()
+                            : child,
                       );
                     },
                     fit: BoxFit.cover,
