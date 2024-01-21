@@ -9,19 +9,18 @@ class MovieDetailsPage extends StatelessWidget {
   const MovieDetailsPage({
     super.key,
     required this.movieId,
+    required this.title,
   });
 
   final MovieId movieId;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-        child: BlocProvider<MovieDetailsCubit>(
-          create: (context) => DI.sl<MovieDetailsCubit>()..getDetails(movieId),
-          child: const MovieDetailsContent(),
-        ),
+    return BlocProvider<MovieDetailsCubit>(
+      create: (context) => DI.sl<MovieDetailsCubit>()..getDetails(movieId),
+      child: Scaffold(
+        body: MovieDetailsContent(),
       ),
     );
   }

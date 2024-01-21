@@ -27,6 +27,7 @@ class MovieTile extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => MovieDetailsPage(
               movieId: movie.id,
+              title: movie.title,
             ),
           ),
         );
