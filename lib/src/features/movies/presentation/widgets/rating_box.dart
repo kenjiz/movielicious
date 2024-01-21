@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/constants/theme_constants.dart';
+import 'package:movielicious/src/core/constants/theme_constants.dart';
 
 class RatingBox extends StatelessWidget {
   const RatingBox({
-    Key? key,
+    super.key,
     required this.rating,
-  }) : super(key: key);
+  });
 
   final String rating;
 

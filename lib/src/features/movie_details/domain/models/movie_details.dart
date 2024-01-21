@@ -36,13 +36,15 @@ class MovieDetails extends Equatable {
     return MovieDetails(
       id: response.id,
       backdropPath: kBaseImagePath + response.backdropPath,
-      genres: response.genres.map((g) => genreList.firstWhere((genre) => g.id == genre.id)).toList(),
+      genres: response.genres
+          .map((g) => genreList.firstWhere((genre) => g.id == genre.id))
+          .toList(),
       homepage: response.homepage,
       title: response.title,
       posterPath: kBaseImagePath + response.posterPath,
       year: response.releaseDate.split('-').first,
       overview: response.overview,
-      voteAverage: response.voteAverage.toStringAsPrecision(1),
+      voteAverage: response.voteAverage.toStringAsFixed(2),
       runtime: runTimeToMinutes(response.runtime),
     );
   }
