@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 
 import 'package:movielicious/src/core/constants/http_constants.dart';
 import 'package:movielicious/src/core/service/tmdb_api.dart';
+import 'package:movielicious/src/features/movie_details/data/movie_details_repository.dart';
 import 'package:movielicious/src/features/movie_details/presentation/bloc/details/movie_details_cubit.dart';
 import 'package:movielicious/src/features/movies/application/movie_service.dart';
 import 'package:movielicious/src/features/movies/data/movie_repository.dart';
@@ -29,9 +30,9 @@ class DI {
       )
 
       //* Repositories
-      ..registerLazySingleton<MovieRepository>(
-        () => MovieRepository(sl()),
-      )
+      ..registerLazySingleton<MovieRepository>(() => MovieRepository(sl()))
+      ..registerLazySingleton<MovieDetailsRepository>(
+          () => MovieDetailsRepository(sl()))
 
       //* API
       ..registerLazySingleton(

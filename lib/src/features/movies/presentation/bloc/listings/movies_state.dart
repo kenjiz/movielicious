@@ -1,20 +1,14 @@
 part of 'base_movies_bloc.dart';
 
-enum MoviesStateStatus {
-  loading,
-  success,
-  failure,
-}
-
 class MoviesState extends Equatable {
-  final MoviesStateStatus status;
+  final StateStatus status;
   final List<Movie> movies;
   final int currentPage;
   final bool hasReachedMax;
   final MoviePageError? error;
 
   const MoviesState({
-    this.status = MoviesStateStatus.loading,
+    this.status = StateStatus.loading,
     this.movies = const <Movie>[],
     this.currentPage = 1,
     this.hasReachedMax = false,
@@ -25,7 +19,7 @@ class MoviesState extends Equatable {
   List<Object> get props => [status, movies, currentPage, hasReachedMax];
 
   MoviesState copyWith({
-    MoviesStateStatus? status,
+    StateStatus? status,
     List<Movie>? movies,
     int? currentPage,
     bool? hasReachedMax,
