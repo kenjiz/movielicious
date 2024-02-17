@@ -29,28 +29,41 @@ class MovieDetailsPage extends StatelessWidget {
           switch (state.status) {
             case StateStatus.loading:
               return const Center(child: AdaptiveProgressIndicator());
+
             case StateStatus.success:
               final details = state.movieDetails!;
-              return ListView(
-                children: [
-                  MoviePosterContainer(
-                    backgroundImage: state.movieDetails!.backdropPath,
-                    child: MovieTitle(
-                      title: details.title,
-                      genres: details.genres,
-                      runtime: details.runtime,
-                      voteAverage: details.voteAverage,
-                      year: details.year,
-                    ),
-                  ),
-                  MovieStoryOverview(content: details.overview)
-                ].addEqualGap(gap: const Gap(20)),
-              );
+              return _MovieDetails(details: details);
+
             case StateStatus.failure:
               return Center(child: Text(state.error?.message ?? 'Error'));
           }
         }),
       ),
+    );
+  }
+}
+
+class _MovieDetails extends StatelessWidget {
+  const _MovieDetails({required this.details});
+
+  final MovieDetails details;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        MoviePosterContainer(
+          backgroundImage: details.backdropPath,
+          child: MovieTitle(
+            title: details.title,
+            genres: details.genres,
+            runtime: details.runtime,
+            voteAverage: details.voteAverage,
+            year: details.year,
+          ),
+        ),
+        MovieStoryOverview(content: details.overview)
+      ].addEqualGap(gap: const Gap(20)),
     );
   }
 }

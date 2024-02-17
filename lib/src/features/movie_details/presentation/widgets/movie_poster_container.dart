@@ -34,6 +34,7 @@ class MoviePosterContainer extends StatelessWidget {
             ),
           ),
           child,
+          AppBar(backgroundColor: Colors.transparent),
         ],
       ),
     );
