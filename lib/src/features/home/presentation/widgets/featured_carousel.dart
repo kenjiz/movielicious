@@ -2,13 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:movielicious/src/core/constants/http_constants.dart';
-import 'package:movielicious/src/core/enums/state_status.dart';
-import 'package:movielicious/src/core/widgets/adaptive_progress_indicator.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/listings/movies_bloc.dart';
-import 'package:movielicious/src/features/movies/presentation/widgets/movie_title.dart';
+import 'package:movielicious/src/core/core.dart';
+import 'package:movielicious/src/features/movies/movies.dart';
 
 class FeaturedCarousel extends StatelessWidget {
   const FeaturedCarousel({super.key});

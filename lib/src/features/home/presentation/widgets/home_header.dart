@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:movielicious/src/core/constants/theme_constants.dart';
+import 'package:movielicious/src/core/core.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});

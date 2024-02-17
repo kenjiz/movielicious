@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+
+import 'package:movielicious/src/core/enums/state_status.dart';
+import 'package:movielicious/src/core/extensions/list_extension.dart';
 import 'package:movielicious/src/core/typdefs/movie_id.dart';
-import 'package:movielicious/src/features/movie_details/presentation/bloc/details/movie_details_cubit.dart';
-import 'package:movielicious/src/features/movie_details/presentation/widgets/movie_details_content.dart';
+import 'package:movielicious/src/core/widgets/adaptive_progress_indicator.dart';
+import 'package:movielicious/src/features/movie_details/movie_details.dart';
 import 'package:movielicious/src/injection_container.dart';
 
 class MovieDetailsPage extends StatelessWidget {
@@ -20,7 +24,32 @@ class MovieDetailsPage extends StatelessWidget {
     return BlocProvider<MovieDetailsCubit>(
       create: (context) => DI.sl<MovieDetailsCubit>()..getDetails(movieId),
       child: Scaffold(
-        body: MovieDetailsContent(),
+        body: BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
+            builder: (context, state) {
+          switch (state.status) {
+            case StateStatus.loading:
+              return const Center(child: AdaptiveProgressIndicator());
+            case StateStatus.success:
+              final details = state.movieDetails!;
+              return ListView(
+                children: [
+                  MoviePosterContainer(
+                    backgroundImage: state.movieDetails!.backdropPath,
+                    child: MovieTitle(
+                      title: details.title,
+                      genres: details.genres,
+                      runtime: details.runtime,
+                      voteAverage: details.voteAverage,
+                      year: details.year,
+                    ),
+                  ),
+                  MovieStoryOverview(content: details.overview)
+                ].addEqualGap(gap: const Gap(20)),
+              );
+            case StateStatus.failure:
+              return Center(child: Text(state.error?.message ?? 'Error'));
+          }
+        }),
       ),
     );
   }

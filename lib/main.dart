@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movielicious/src/features/home/presentation/page/home_page.dart';
 
-import 'src/core/bloc_providers.dart';
-import 'src/core/themes/theme.dart';
-import 'src/injection_container.dart';
+import 'package:movielicious/src/core/core.dart';
+import 'package:movielicious/src/features/home/home.dart';
+import 'package:movielicious/src/injection_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

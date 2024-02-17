@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:movielicious/src/core/constants/http_constants.dart';
 import 'package:movielicious/src/core/constants/theme_constants.dart';
-import 'package:movielicious/src/features/movie_details/presentation/pages/movie_details_page.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie.dart';
-import 'package:movielicious/src/features/movies/presentation/widgets/movie_title.dart';
+import 'package:movielicious/src/features/movie_details/movie_details.dart'
+    hide MovieTitle;
+import 'package:movielicious/src/features/movies/movies.dart';
 
 class MovieTile extends StatelessWidget {
   const MovieTile({
