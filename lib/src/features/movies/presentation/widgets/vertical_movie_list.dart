@@ -2,9 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movielicious/src/core/constants/theme_constants.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
-import 'package:movielicious/src/features/movies/presentation/widgets/movie_tile.dart';
+import 'package:movielicious/src/features/movies/movies.dart';
 
 class VerticalMovieList<B extends BaseMoviesBloc> extends StatefulWidget {
   const VerticalMovieList({
@@ -18,7 +16,8 @@ class VerticalMovieList<B extends BaseMoviesBloc> extends StatefulWidget {
   State<VerticalMovieList<B>> createState() => _VerticalMovieListState<B>();
 }
 
-class _VerticalMovieListState<B extends BaseMoviesBloc> extends State<VerticalMovieList<B>> {
+class _VerticalMovieListState<B extends BaseMoviesBloc>
+    extends State<VerticalMovieList<B>> {
   final _scrollController = ScrollController();
 
   @override

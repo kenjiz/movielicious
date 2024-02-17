@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:movielicious/src/core/constants/theme_constants.dart';
-import 'package:movielicious/src/core/widgets/custom_appbar.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/listings/movies_bloc.dart';
-import 'package:movielicious/src/features/movies/presentation/widgets/horizontal_movie_list_container.dart';
-import 'package:movielicious/src/features/home/presentation/widgets/featured_carousel.dart';
-import 'package:movielicious/src/features/home/presentation/widgets/home_header.dart';
-import 'package:movielicious/src/features/movies/presentation/widgets/movie_list.dart';
+import 'package:movielicious/src/core/core.dart';
+import 'package:movielicious/src/features/movies/movies.dart';
+import 'package:movielicious/src/features/home/home.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

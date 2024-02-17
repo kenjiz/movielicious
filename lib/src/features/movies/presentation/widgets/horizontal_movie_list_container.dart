@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:movielicious/src/core/constants/theme_constants.dart';
-import 'package:movielicious/src/features/movies/presentation/bloc/listings/base_movies_bloc.dart';
-import 'package:movielicious/src/features/movies/presentation/pages/movie_listing_page.dart';
+import 'package:movielicious/src/features/movies/movies.dart';
 
-class HorizontalMovieListContainer<B extends BaseMoviesBloc> extends StatelessWidget {
+class HorizontalMovieListContainer<B extends BaseMoviesBloc>
+    extends StatelessWidget {
   const HorizontalMovieListContainer({
     super.key,
     required this.title,
