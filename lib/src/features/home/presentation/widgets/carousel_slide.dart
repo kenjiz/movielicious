@@ -34,6 +34,7 @@ class CarouselSlide extends StatelessWidget {
             children: [
               Image.network(
                 kBaseImagePath + movie.posterPath,
+                // TODO: refactor
                 loadingBuilder: (context, child, loadingProgress) {
                   final totalBytes = loadingProgress?.expectedTotalBytes ?? 0;
                   final bytesLoaded =

@@ -21,8 +21,15 @@ class MovieDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<MovieDetailsCubit>(
-      create: (context) => DI.sl<MovieDetailsCubit>()..getDetails(movieId),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<MovieDetailsCubit>(
+          create: (context) => DI.sl<MovieDetailsCubit>()..getDetails(movieId),
+        ),
+        BlocProvider(
+          create: (context) => DI.sl<MovieImagesCubit>()..getImages(movieId),
+        ),
+      ],
       child: Scaffold(
         body: BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
             builder: (context, state) {
@@ -62,7 +69,8 @@ class _MovieDetails extends StatelessWidget {
             year: details.year,
           ),
         ),
-        MovieStoryOverview(content: details.overview)
+        MovieStoryOverview(content: details.overview),
+        const MovieImagesContainer(),
       ].addEqualGap(gap: const Gap(20)),
     );
   }
