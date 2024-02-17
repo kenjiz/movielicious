@@ -1,11 +1,9 @@
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
-import 'package:movielicious/src/core/typdefs/movie_id.dart';
-import 'package:movielicious/src/features/movie_details/domain/models/movie_details_response.dart';
 
-import 'package:movielicious/src/features/movies/domain/models/movie_queries.dart';
-import 'package:movielicious/src/features/movies/domain/models/movie_page_response.dart';
-import 'package:movielicious/src/core/constants/http_constants.dart';
+import 'package:movielicious/src/core/core.dart';
+import 'package:movielicious/src/features/movie_details/movie_details.dart';
+import 'package:movielicious/src/features/movies/movies.dart';
 
 part 'tmdb_api.g.dart';
 
@@ -29,6 +27,15 @@ abstract class TMDBApi {
   /// Throws a [DioException] for all error codes.
   @GET('/movie/{movieId}')
   Future<MovieDetailsResponse> getMovieDetails(
+    @Path('movieId') MovieId id,
+  );
+
+  /// Calls the https://api.themoviedb.org/3/movie/{movieId}/images endpoint.
+  /// Takes the property value of [MovieId] and
+  /// returns a [MovieImage].
+  /// Throws a [DioException] for all error codes.
+  @GET('/movie/{movieId}/images')
+  Future<MovieImageResponse> getMovieImages(
     @Path('movieId') MovieId id,
   );
 
