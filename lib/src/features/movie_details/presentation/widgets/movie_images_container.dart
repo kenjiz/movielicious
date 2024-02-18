@@ -1,7 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
@@ -83,23 +81,11 @@ class _ImagesSlide extends StatelessWidget {
       },
       child: GestureDetector(
         onTap: () {},
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-          child: Image.network(
-            kBaseImagePath + image.filePath,
-            // TODO: refactor
-            loadingBuilder: (context, child, loadingProgress) {
-              final totalBytes = loadingProgress?.expectedTotalBytes ?? 0;
-              final bytesLoaded = loadingProgress?.cumulativeBytesLoaded ?? 0;
-              return Center(
-                child: bytesLoaded < totalBytes
-                    ? const AdaptiveProgressIndicator()
-                    : child,
-              );
-            },
-            fit: BoxFit.cover,
-            alignment: Alignment.topCenter,
-            width: 1000,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+            child: LoadedImage(source: image.filePath),
           ),
         ),
       ),
