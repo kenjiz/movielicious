@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MoviePosterContainer extends StatelessWidget {
-  const MoviePosterContainer({
+class MovieHeaderContainer extends StatelessWidget {
+  const MovieHeaderContainer({
     required this.backgroundImage,
     required this.child,
     super.key,

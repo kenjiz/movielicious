@@ -6,23 +6,22 @@ import 'package:gap/gap.dart';
 import 'package:movielicious/src/core/core.dart';
 import 'package:movielicious/src/features/movie_details/movie_details.dart';
 
-class MovieImagesContainer extends StatelessWidget {
-  const MovieImagesContainer({super.key});
+class MovieGalleryContainer extends StatelessWidget {
+  const MovieGalleryContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieImagesCubit, MovieImagesState>(
+    return BlocBuilder<MovieGalleryCubit, MovieGalleryState>(
       builder: (context, state) {
         return switch (state.status) {
           StateStatus.loading => const Center(
               child: AdaptiveProgressIndicator(),
             ),
-          StateStatus.success when state.movieImages.isNotEmpty =>
-            _GalleryContainer(
+          StateStatus.success when state.images.isNotEmpty => _GalleryContainer(
               child: CarouselSlider.builder(
-                itemCount: state.movieImages.length,
+                itemCount: state.images.length,
                 itemBuilder: (_, index, __) =>
-                    _ImagesSlide(image: state.movieImages[index]),
+                    _GalleryImage(image: state.images[index]),
                 options: CarouselOptions(
                   autoPlay: true,
                   enlargeCenterPage: false,
@@ -31,7 +30,7 @@ class MovieImagesContainer extends StatelessWidget {
                 ),
               ),
             ),
-          StateStatus.success => const Center(child: Text('Empty images..')),
+          StateStatus.success => const Center(child: Text('Empty gallery..')),
           StateStatus.failure => Center(child: Text(state.error!.message)),
         };
       },
@@ -68,8 +67,8 @@ class _GalleryContainer extends StatelessWidget {
   }
 }
 
-class _ImagesSlide extends StatelessWidget {
-  const _ImagesSlide({required this.image});
+class _GalleryImage extends StatelessWidget {
+  const _GalleryImage({required this.image});
 
   final MovieImage image;
 
