@@ -24,7 +24,7 @@ class MovieDetailsPage extends StatelessWidget {
           create: (context) => DI.sl<MovieDetailsCubit>()..getDetails(movieId),
         ),
         BlocProvider(
-          create: (context) => DI.sl<MovieImagesCubit>()..getImages(movieId),
+          create: (context) => DI.sl<MovieGalleryCubit>()..getImages(movieId),
         ),
       ],
       child: Scaffold(
@@ -56,7 +56,7 @@ class _MovieDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        MoviePosterContainer(
+        MovieHeaderContainer(
           backgroundImage: details.backdropPath,
           child: MovieTitle(
             title: details.title,
@@ -67,7 +67,7 @@ class _MovieDetails extends StatelessWidget {
           ),
         ),
         MovieStoryOverview(content: details.overview),
-        const MovieImagesContainer(),
+        const MovieGalleryContainer(),
       ].addEqualGap(gap: const Gap(20)),
     );
   }

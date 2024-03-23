@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movielicious/src/core/core.dart';
 import 'package:movielicious/src/features/movie_details/movie_details.dart';
 
-part 'movie_images_state.dart';
+part 'movie_gallery_state.dart';
 
-class MovieImagesCubit extends Cubit<MovieImagesState> {
-  MovieImagesCubit(this._repository)
-      : super(const MovieImagesState(movieImages: []));
+class MovieGalleryCubit extends Cubit<MovieGalleryState> {
+  MovieGalleryCubit(this._repository)
+      : super(const MovieGalleryState(images: []));
 
   final MovieDetailsRepository _repository;
 
@@ -25,7 +25,7 @@ class MovieImagesCubit extends Cubit<MovieImagesState> {
           ),
           (List<MovieImage> images) => emit(
             state.copyWith(
-              movieImages: images,
+              images: images,
               status: StateStatus.success,
             ),
           ),

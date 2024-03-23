@@ -1,4 +1,4 @@
-import 'package:expand_widget/expand_widget.dart';
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -28,10 +28,11 @@ class MovieStoryOverview extends StatelessWidget {
                   height: 1.5,
                 ),
           ),
-          ExpandText(
+          ExpandableText(
             content,
-            maxLines: 4,
-            textAlign: TextAlign.left,
+            expandText: 'show more',
+            collapseText: 'show less',
+            maxLines: 2,
           ),
         ].addEqualGap(gap: const Gap(10)),
       ),

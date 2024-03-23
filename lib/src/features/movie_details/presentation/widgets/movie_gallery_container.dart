@@ -1,30 +1,27 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import 'package:movielicious/src/core/core.dart';
 import 'package:movielicious/src/features/movie_details/movie_details.dart';
 
-class MovieImagesContainer extends StatelessWidget {
-  const MovieImagesContainer({super.key});
+class MovieGalleryContainer extends StatelessWidget {
+  const MovieGalleryContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieImagesCubit, MovieImagesState>(
+    return BlocBuilder<MovieGalleryCubit, MovieGalleryState>(
       builder: (context, state) {
         return switch (state.status) {
           StateStatus.loading => const Center(
               child: AdaptiveProgressIndicator(),
             ),
-          StateStatus.success when state.movieImages.isNotEmpty =>
-            _GalleryContainer(
+          StateStatus.success when state.images.isNotEmpty => _GalleryContainer(
               child: CarouselSlider.builder(
-                itemCount: state.movieImages.length,
+                itemCount: state.images.length,
                 itemBuilder: (_, index, __) =>
-                    _ImagesSlide(image: state.movieImages[index]),
+                    _GalleryImage(image: state.images[index]),
                 options: CarouselOptions(
                   autoPlay: true,
                   enlargeCenterPage: false,
@@ -33,7 +30,7 @@ class MovieImagesContainer extends StatelessWidget {
                 ),
               ),
             ),
-          StateStatus.success => const Center(child: Text('Empty images..')),
+          StateStatus.success => const Center(child: Text('Empty gallery..')),
           StateStatus.failure => Center(child: Text(state.error!.message)),
         };
       },
@@ -70,8 +67,8 @@ class _GalleryContainer extends StatelessWidget {
   }
 }
 
-class _ImagesSlide extends StatelessWidget {
-  const _ImagesSlide({required this.image});
+class _GalleryImage extends StatelessWidget {
+  const _GalleryImage({required this.image});
 
   final MovieImage image;
 
@@ -79,29 +76,55 @@ class _ImagesSlide extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: handle enlarge on tap
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          useRootNavigator: true,
+          barrierColor: Colors.black87,
+          builder: (dialogContext) => ImageModal(image: image),
+        );
       },
-      child: GestureDetector(
-        onTap: () {},
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-          child: Image.network(
-            kBaseImagePath + image.filePath,
-            // TODO: refactor
-            loadingBuilder: (context, child, loadingProgress) {
-              final totalBytes = loadingProgress?.expectedTotalBytes ?? 0;
-              final bytesLoaded = loadingProgress?.cumulativeBytesLoaded ?? 0;
-              return Center(
-                child: bytesLoaded < totalBytes
-                    ? const AdaptiveProgressIndicator()
-                    : child,
-              );
-            },
-            fit: BoxFit.cover,
-            alignment: Alignment.topCenter,
-            width: 1000,
-          ),
+          child: LoadedImage(source: image.filePath),
         ),
+      ),
+    );
+  }
+}
+
+class ImageModal extends StatelessWidget {
+  const ImageModal({
+    required this.image,
+    super.key,
+  });
+
+  final MovieImage image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Stack(
+        children: [
+          Image.network(
+            image.filePath,
+            fit: BoxFit.cover,
+          ),
+          Positioned(
+            right: 0,
+            child: IconButton(
+              icon: const Icon(
+                Icons.close,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
