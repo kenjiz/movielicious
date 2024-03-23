@@ -9,6 +9,7 @@ class LoadedImage extends StatelessWidget {
     this.alignment = Alignment.center,
     this.width,
     this.height,
+    this.pinchToZoom,
     super.key,
   });
 
@@ -17,27 +18,30 @@ class LoadedImage extends StatelessWidget {
   final Alignment alignment;
   final double? width;
   final double? height;
+  final bool? pinchToZoom;
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-      source,
-      loadingBuilder: (context, child, progress) {
-        if (progress == null) return child;
-        return Center(
-            child: AdaptiveProgressIndicator(
-          value: progress.expectedTotalBytes != null
-              ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes!
-              : null,
-        ));
-      },
-      fit: fit,
-      alignment: alignment,
-      width: width,
-      height: height,
-      errorBuilder: (context, error, stackTrace) {
-        return const Center(child: Text('Error loading image'));
-      },
-    );
+    return _buildImage();
   }
+
+  Widget _buildImage() => Image.network(
+        source,
+        loadingBuilder: (context, child, progress) {
+          if (progress == null) return child;
+          return Center(
+              child: AdaptiveProgressIndicator(
+            value: progress.expectedTotalBytes != null
+                ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes!
+                : null,
+          ));
+        },
+        fit: fit,
+        alignment: alignment,
+        width: width,
+        height: height,
+        errorBuilder: (context, error, stackTrace) {
+          return const Center(child: Text('Error loading image'));
+        },
+      );
 }

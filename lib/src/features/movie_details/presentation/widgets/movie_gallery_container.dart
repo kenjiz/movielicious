@@ -76,17 +76,55 @@ class _GalleryImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: handle enlarge on tap
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          useRootNavigator: true,
+          barrierColor: Colors.black87,
+          builder: (dialogContext) => ImageModal(image: image),
+        );
       },
-      child: GestureDetector(
-        onTap: () {},
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-            child: LoadedImage(source: image.filePath),
-          ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+          child: LoadedImage(source: image.filePath),
         ),
+      ),
+    );
+  }
+}
+
+class ImageModal extends StatelessWidget {
+  const ImageModal({
+    required this.image,
+    super.key,
+  });
+
+  final MovieImage image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Stack(
+        children: [
+          Image.network(
+            image.filePath,
+            fit: BoxFit.cover,
+          ),
+          Positioned(
+            right: 0,
+            child: IconButton(
+              icon: const Icon(
+                Icons.close,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
