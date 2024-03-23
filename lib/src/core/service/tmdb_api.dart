@@ -1,3 +1,4 @@
+import 'package:movielicious/src/features/movie_details/domain/models/movie_credits_response.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
@@ -36,6 +37,15 @@ abstract class TMDBApi {
   /// Throws a [DioException] for all error codes.
   @GET('/movie/{movieId}/images')
   Future<MovieImageResponse> getMovieImages(
+    @Path('movieId') MovieId id,
+  );
+
+  /// Calls the https://api.themoviedb.org/3/movie/{movie_id}/credits endpoint.
+  /// Takes the property value of [MovieId] and
+  /// returns a [MovieCast].
+  /// Throws a [DioException] for all error codes.
+  @GET('/movie/{movieId}/images')
+  Future<MovieCreditsResponse> getMovieCredits(
     @Path('movieId') MovieId id,
   );
 

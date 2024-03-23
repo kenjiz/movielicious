@@ -2,11 +2,17 @@ import 'package:fpdart/fpdart.dart';
 
 import 'package:movielicious/src/core/core.dart';
 import 'package:movielicious/src/features/errors/domain/models/api_request_error.dart';
+import 'package:movielicious/src/features/movie_details/domain/models/movie_cast.dart';
+import 'package:movielicious/src/features/movie_details/domain/models/movie_credits_response.dart';
 import 'package:movielicious/src/features/movie_details/movie_details.dart';
 
 typedef FutureEitherMovieDetails = TaskEither<MovieDetailsError, MovieDetails>;
+
 typedef FutureEitherMovieImages
     = TaskEither<MovieDetailsError, List<MovieImage>>;
+
+typedef FutureEitherMovieCredits
+    = TaskEither<MovieDetailsError, List<MovieCast>>;
 
 class MovieDetailsRepository extends BaseApiRepository {
   final TMDBApi _api;
@@ -25,6 +31,12 @@ class MovieDetailsRepository extends BaseApiRepository {
     ).flatMap<List<MovieImage>>(_toMovieImage).mapLeft(transformError);
   }
 
+  FutureEitherMovieCredits getMovieCredits(MovieId id) {
+    return processRequest<MovieCreditsResponse>(
+      request: () => _api.getMovieCredits(id),
+    ).flatMap<List<MovieCast>>(_toMovieCast).mapLeft(transformError);
+  }
+
   // map to [MovieDetails]
   FutureEitherMovieDetails _toMovieDetails(MovieDetailsResponse response) {
     return TaskEither.right(MovieDetails.mapper(response));
@@ -33,6 +45,11 @@ class MovieDetailsRepository extends BaseApiRepository {
   // map to [MovieImage]
   FutureEitherMovieImages _toMovieImage(MovieImageResponse response) {
     return TaskEither.right(response.backdrops);
+  }
+
+  // map to [MovieCast]
+  FutureEitherMovieCredits _toMovieCast(MovieCreditsResponse response) {
+    return TaskEither.right(response.cast);
   }
 
   @override
