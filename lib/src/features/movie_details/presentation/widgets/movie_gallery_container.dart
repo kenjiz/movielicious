@@ -81,7 +81,7 @@ class _GalleryImage extends StatelessWidget {
           barrierDismissible: false,
           useRootNavigator: true,
           barrierColor: Colors.black87,
-          builder: (dialogContext) => ImageModal(image: image),
+          builder: (dialogContext) => _ImageModal(image: image),
         );
       },
       child: Padding(
@@ -95,11 +95,8 @@ class _GalleryImage extends StatelessWidget {
   }
 }
 
-class ImageModal extends StatelessWidget {
-  const ImageModal({
-    required this.image,
-    super.key,
-  });
+class _ImageModal extends StatelessWidget {
+  const _ImageModal({required this.image});
 
   final MovieImage image;
 
