@@ -44,7 +44,7 @@ abstract class TMDBApi {
   /// Takes the property value of [MovieId] and
   /// returns a [MovieCast].
   /// Throws a [DioException] for all error codes.
-  @GET('/movie/{movieId}/images')
+  @GET('/movie/{movieId}/credits')
   Future<MovieCreditsResponse> getMovieCredits(
     @Path('movieId') MovieId id,
   );

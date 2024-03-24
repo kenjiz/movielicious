@@ -1,30 +1,28 @@
 import 'package:equatable/equatable.dart';
+import 'package:movielicious/src/core/core.dart';
 
-typedef CastId = String;
+typedef CastId = int;
 
 class MovieCast extends Equatable {
   const MovieCast({
     required this.id,
     required this.name,
     required this.character,
-    required this.profilePath,
-    required this.order,
+    this.profilePath,
   });
 
   final CastId id;
   final String name;
+  final String? profilePath;
   final String character;
-  final String profilePath;
-  final int order;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       name,
       character,
       profilePath,
-      order,
     ];
   }
 
@@ -34,7 +32,6 @@ class MovieCast extends Equatable {
       'name': name,
       'character': character,
       'profilePath': profilePath,
-      'order': order,
     };
   }
 
@@ -42,9 +39,10 @@ class MovieCast extends Equatable {
     return MovieCast(
       id: map['id'] as CastId,
       name: map['name'] as String,
+      profilePath: (map['profile_path'] != null)
+          ? kBaseImagePath + map['profile_path']
+          : null,
       character: map['character'] as String,
-      profilePath: map['profilePath'] as String,
-      order: map['order'] as int,
     );
   }
 }

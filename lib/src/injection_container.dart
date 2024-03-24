@@ -20,6 +20,7 @@ class DI {
       ..registerFactory(() => PopularMoviesBloc(sl()))
       ..registerFactory(() => MovieDetailsCubit(sl()))
       ..registerFactory(() => MovieGalleryCubit(sl()))
+      ..registerFactory(() => MovieCreditsCubit(sl()))
 
       //* Application Service
       ..registerLazySingleton<MovieService>(
