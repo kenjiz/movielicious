@@ -1,9 +1,8 @@
-import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:movielicious/src/core/enums/state_status.dart';
-import 'package:stream_transform/stream_transform.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:movielicious/src/core/enums/state_status.dart';
+import 'package:movielicious/src/core/transformers/throttle_droppable.dart';
 import 'package:movielicious/src/features/movies/application/movie_service.dart';
 import 'package:movielicious/src/features/movies/data/movie_repository.dart';
 import 'package:movielicious/src/features/movies/domain/enums/movie_category.dart';
@@ -14,15 +13,6 @@ import 'package:movielicious/src/features/movies/domain/models/movie_queries.dar
 
 part 'movies_event.dart';
 part 'movies_state.dart';
-
-const throttleDuration = Duration(milliseconds: 200);
-
-EventTransformer<E> throttleDroppable<E>() {
-  return (events, mapper) => droppable<E>().call(
-        events.throttle(throttleDuration),
-        mapper,
-      );
-}
 
 abstract class BaseMoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   final MovieService _service;

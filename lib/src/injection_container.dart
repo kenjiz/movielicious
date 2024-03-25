@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:movielicious/src/core/core.dart';
 import 'package:movielicious/src/features/movie_details/movie_details.dart';
 import 'package:movielicious/src/features/movies/movies.dart';
+import 'package:movielicious/src/features/reviews/reviews.dart';
 
 class DI {
   const DI._();
@@ -21,6 +22,7 @@ class DI {
       ..registerFactory(() => MovieDetailsCubit(sl()))
       ..registerFactory(() => MovieGalleryCubit(sl()))
       ..registerFactory(() => MovieCreditsCubit(sl()))
+      ..registerFactory(() => ReviewsBloc(sl()))
 
       //* Application Service
       ..registerLazySingleton<MovieService>(
@@ -29,6 +31,8 @@ class DI {
 
       //* Repositories
       ..registerLazySingleton<MovieRepository>(() => MovieRepository(sl()))
+      ..registerLazySingleton<MovieReviewsRepository>(
+          () => MovieReviewsRepository(sl()))
       ..registerLazySingleton<MovieDetailsRepository>(
           () => MovieDetailsRepository(sl()))
 
