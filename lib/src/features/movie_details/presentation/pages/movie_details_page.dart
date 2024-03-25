@@ -4,8 +4,8 @@ import 'package:gap/gap.dart';
 
 import 'package:movielicious/src/core/core.dart';
 import 'package:movielicious/src/features/movie_details/movie_details.dart';
-import 'package:movielicious/src/features/movie_details/presentation/bloc/credits/movie_credits_cubit.dart';
 import 'package:movielicious/src/features/movie_details/presentation/widgets/movie_credits_container.dart';
+import 'package:movielicious/src/features/reviews/reviews.dart';
 import 'package:movielicious/src/injection_container.dart';
 
 class MovieDetailsPage extends StatelessWidget {
@@ -30,6 +30,10 @@ class MovieDetailsPage extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => DI.sl<MovieCreditsCubit>()..getCredits(movieId),
+        ),
+        BlocProvider(
+          create: (context) => DI.sl<ReviewsBloc>()
+            ..add(ReviewListFetched(id: movieId, page: 1)),
         ),
       ],
       child: Scaffold(
@@ -73,7 +77,8 @@ class _MovieDetails extends StatelessWidget {
         ),
         MovieStoryOverview(content: details.overview),
         const MovieGalleryContainer(),
-        const MovieCreditsContainer()
+        const MovieCreditsContainer(),
+        const ReviewListContainer(),
       ].addEqualGap(gap: const Gap(20)),
     );
   }

@@ -1,9 +1,10 @@
-import 'package:movielicious/src/features/movie_details/domain/models/movie_credits_response.dart';
+import 'package:movielicious/src/features/reviews/reviews.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
 import 'package:movielicious/src/core/core.dart';
 import 'package:movielicious/src/features/movie_details/movie_details.dart';
+import 'package:movielicious/src/features/movie_details/domain/models/movie_credits_response.dart';
 import 'package:movielicious/src/features/movies/movies.dart';
 
 part 'tmdb_api.g.dart';
@@ -33,7 +34,7 @@ abstract class TMDBApi {
 
   /// Calls the https://api.themoviedb.org/3/movie/{movieId}/images endpoint.
   /// Takes the property value of [MovieId] and
-  /// returns a [MovieImage].
+  /// returns a [MovieImageResponse].
   /// Throws a [DioException] for all error codes.
   @GET('/movie/{movieId}/images')
   Future<MovieImageResponse> getMovieImages(
@@ -42,12 +43,22 @@ abstract class TMDBApi {
 
   /// Calls the https://api.themoviedb.org/3/movie/{movie_id}/credits endpoint.
   /// Takes the property value of [MovieId] and
-  /// returns a [MovieCast].
+  /// returns a [MovieCreditsResponse].
   /// Throws a [DioException] for all error codes.
   @GET('/movie/{movieId}/credits')
   Future<MovieCreditsResponse> getMovieCredits(
     @Path('movieId') MovieId id,
   );
+
+  /// Calls the https://api.themoviedb.org/3/movie/{movieId}/reviews endpoint.
+  /// Takes a value of the [MovieId] and [int] as query parameter,
+  /// returns a [MovieReviewsResponse].
+  /// Throws a [DioException] for all error codes.
+  @GET('/movie/{movieId}/reviews')
+  Future<MovieReviewsResponse> getReviews(
+    @Path('movieId') MovieId id, {
+    @Query('page') required int page,
+  });
 
 /*
   /// Calls the https://api.themoviedb.org/3/discover/movie=with_genres{genreIds} endpoint.

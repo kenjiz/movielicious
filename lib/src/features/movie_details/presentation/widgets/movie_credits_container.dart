@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-import 'package:movielicious/src/core/constants/theme_constants.dart';
 import 'package:movielicious/src/core/core.dart';
-import 'package:movielicious/src/core/enums/state_status.dart';
-import 'package:movielicious/src/core/extensions/list_extension.dart';
 import 'package:movielicious/src/features/movie_details/domain/models/movie_cast.dart';
 import 'package:movielicious/src/features/movie_details/presentation/bloc/credits/movie_credits_cubit.dart';
 
