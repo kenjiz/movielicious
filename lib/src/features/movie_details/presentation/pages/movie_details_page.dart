@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:movielicious/src/core/core.dart';
 import 'package:movielicious/src/features/movie_details/movie_details.dart';
 import 'package:movielicious/src/features/movie_details/presentation/widgets/movie_credits_container.dart';
+import 'package:movielicious/src/features/movie_details/presentation/widgets/review_list_container.dart';
 import 'package:movielicious/src/features/reviews/reviews.dart';
 import 'package:movielicious/src/injection_container.dart';
 
@@ -45,7 +46,11 @@ class MovieDetailsPage extends StatelessWidget {
 
             case StateStatus.success:
               final details = state.movieDetails!;
-              return _MovieDetails(details: details);
+              return _MovieDetails(
+                id: movieId,
+                movieTitle: title,
+                details: details,
+              );
 
             case StateStatus.failure:
               return Center(child: Text(state.error?.message ?? 'Error'));
@@ -57,9 +62,15 @@ class MovieDetailsPage extends StatelessWidget {
 }
 
 class _MovieDetails extends StatelessWidget {
-  const _MovieDetails({required this.details});
+  const _MovieDetails({
+    required this.id,
+    required this.movieTitle,
+    required this.details,
+  });
 
   final MovieDetails details;
+  final MovieId id;
+  final String movieTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +89,10 @@ class _MovieDetails extends StatelessWidget {
         MovieStoryOverview(content: details.overview),
         const MovieGalleryContainer(),
         const MovieCreditsContainer(),
-        const ReviewListContainer(),
+        ReviewListContainer(
+          id: id,
+          movieTitle: movieTitle,
+        ),
       ].addEqualGap(gap: const Gap(20)),
     );
   }

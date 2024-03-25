@@ -5,7 +5,14 @@ import 'package:movielicious/src/core/core.dart';
 import 'package:movielicious/src/features/reviews/reviews.dart';
 
 class ReviewListContainer extends StatelessWidget {
-  const ReviewListContainer({super.key});
+  const ReviewListContainer({
+    required this.id,
+    required this.movieTitle,
+    super.key,
+  });
+
+  final MovieId id;
+  final String movieTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +33,14 @@ class ReviewListContainer extends StatelessWidget {
                     ),
               ),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ReviewsPage(
+                        id: id,
+                        movieTitle: movieTitle,
+                      ),
+                    ));
+                  },
                   child: Text(
                     'View All',
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(
@@ -57,56 +71,13 @@ class _MovieReviews extends StatelessWidget {
             ),
           ReviewsStateStatus.initial ||
           ReviewsStateStatus.success when state.reviews.isNotEmpty =>
-            _ReviewsWidget(reviews: state.reviews),
+            SizedBox(height: 550, child: ReviewsWidget(reviews: state.reviews)),
           ReviewsStateStatus.initial ||
           ReviewsStateStatus.success =>
             const Center(child: Text('Empty reviews...')),
           ReviewsStateStatus.error => Center(child: Text(state.error!.message)),
         };
       },
-    );
-  }
-}
-
-class _ReviewsWidget extends StatelessWidget {
-  const _ReviewsWidget({
-    required this.reviews,
-  });
-
-  final List<Review> reviews;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 350,
-      child: ListView.separated(
-        separatorBuilder: (_, __) =>
-            const Divider(color: Colors.white24, thickness: 1),
-        itemCount: reviews.length < 2 ? reviews.length : 2,
-        itemBuilder: (context, index) {
-          final review = reviews[index];
-          return Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(review.content),
-                const Gap(15),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text('${review.authorDetails.rating} ⭐'),
-                    const Gap(5),
-                    Text(review.author),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
-      ),
     );
   }
 }

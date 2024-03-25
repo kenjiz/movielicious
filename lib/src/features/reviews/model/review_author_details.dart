@@ -4,15 +4,15 @@ class ReviewAuthorDetails extends Equatable {
   const ReviewAuthorDetails({
     required this.name,
     required this.username,
-    required this.rating,
+    this.rating,
   });
 
   final String name;
   final String username;
-  final double rating;
+  final double? rating;
 
   @override
-  List<Object> get props => [name, username, rating];
+  List<Object?> get props => [name, username, rating];
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -26,7 +26,7 @@ class ReviewAuthorDetails extends Equatable {
     return ReviewAuthorDetails(
       name: map['name'] as String,
       username: map['username'] as String,
-      rating: map['rating'] as double,
+      rating: map['rating'] ?? 0.0,
     );
   }
 }
