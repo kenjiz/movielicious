@@ -1,0 +1,68 @@
+version: 1
+labels:
+- label: "size/XS"
+  size:
+    below: 50
+
+- label: "size/S"
+  size:
+    above: 50
+    below: 200
+
+- label: "size/M"
+  size:
+    above: 200
+    below: 700
+
+- label: "size/L"
+  size:
+    above: 700
+    below: 1000
+
+- label: "size/XL"
+  size:
+    above: 1000
+
+- label: "refactor"
+  branch: "^refactor/.*"
+
+- label: "build"
+  branch: "^sales/.*"
+
+- label: "build"
+  branch: "^release/.*"
+
+- label: "build"
+  branch: "^testflight/.*"
+
+- label: "refactor"
+  title: 'refactor|REFACTOR'
+
+- label: "fix"
+  branch: "^fix/.*|^bugfix/.*|^bug/.*"
+
+- label: "hotfix"
+  branch: "^hotfix/.*"
+
+- label: "chore"
+  branch: "^chore/.*"
+
+- label: "feature"
+  branch: "^feature/.*|^feat/.*"
+
+- label: "docs"
+  files: 
+  - "*.md"
+
+- label: "test"
+  files: 
+  - "test/.*"
+
+- label: "dependencies"
+  files: 
+  - "pubspec.*"
+  - "dependencies/.*"
+
+- label: "ci"
+  files: 
+  - ".github/.*"
