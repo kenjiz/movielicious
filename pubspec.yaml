@@ -33,7 +33,7 @@ dev_dependencies:
   mocktail: ^1.0.1
   bloc_test: ^9.1.5
   retrofit_generator: ^8.0.1
-  flutter_lints: ^3.0.1
+  flutter_lints: ^4.0.0
   build_runner: ^2.4.6
   http_mock_adapter: ^0.6.0
 
