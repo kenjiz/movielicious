@@ -26,6 +26,10 @@ dependencies:
   stream_transform: ^2.1.0
   gap: ^3.0.1
   expandable_text: ^2.3.0
+  flutter_ui_components:
+    git:
+      url: https://github.com/kenjiz/flutter_ui_components.git
+      ref: v0.0.1-alpha
 
 dev_dependencies:
   flutter_test:
