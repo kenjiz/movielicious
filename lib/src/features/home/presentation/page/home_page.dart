@@ -10,14 +10,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        actionButtons: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      appBar: const CustomAppBar(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final height = constraints.maxHeight;
