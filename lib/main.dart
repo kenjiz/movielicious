@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'src/core/bloc_providers.dart';
-import 'src/core/themes/theme.dart';
-import 'src/injection_container.dart';
-import 'src/features/home/presentation/page/home_page.dart';
+import 'package:movielicious/src/core/core.dart';
+import 'package:movielicious/src/features/home/home.dart';
+import 'package:movielicious/src/injection_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await dotenv.load(fileName: 'assets/.env');
-  await InjectionContainer.init();
+  await DI.init();
 
   runApp(const MyApp());
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../movies/presentation/pages/movie_listing_page.dart';
-import '../../../../core/constants/theme_constants.dart';
+import 'package:movielicious/src/core/core.dart';
+import 'package:movielicious/src/features/movies/movies.dart';
 
 class SearchField extends StatefulWidget {
   const SearchField({super.key});

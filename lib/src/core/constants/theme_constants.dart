@@ -8,29 +8,30 @@ const double kAppTitleMargin = 20;
 const double kAppHorizontalMargin = 20;
 const double kAppVerticalMargin = 50;
 const double kAppWidgetListBottomMargin = 15;
+const double kAppBodyMargin = 10;
 
 // Padding
-const double kAppWidgetPadding = 20;
+const double kAppWidgetPadding = 15;
 
 // Box Decorations
 const double kAppBorderRadius = 15;
 
 // Palette
 /// The app color palette
-const Color kDeepPurple = Color(0xFF191a32);
+const Color kDeepPurple = Color(0xFF090A0C);
 const Color kPurple = Color(0xFF593357);
 const Color kPurpleRed = Color(0xFFA14F68);
-const Color kOrange = Color(0xFFDD7865);
+const Color kOrange = Color(0xFFF36F1C);
 const Color kLightOrange = Color(0xFFFDB35E);
 const Color kYellow = Color(0xFFF9F871);
 
 const Color kPrimaryColor = kDeepPurple;
-const Color kSecondaryColor = kPurpleRed;
+const Color kSecondaryColor = kOrange;
 const Color kAccentColor = kLightOrange;
 
 // Text Styles
 /// The app text style
-final TextStyle _baseStyle = GoogleFonts.barlow(
+final TextStyle _baseStyle = GoogleFonts.notoSans(
   textStyle: TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.normal,

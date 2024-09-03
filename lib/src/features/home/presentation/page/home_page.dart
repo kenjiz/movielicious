@@ -1,69 +1,80 @@
 import 'package:flutter/material.dart';
 
-import '../../../genre/presentation/widgets/genre_box_list.dart';
-import '../../../../core/widgets/sliver_horizontal_container.dart';
-import '../../../../core/widgets/custom_sliver_app_bar.dart';
-import '../widgets/popular_movie_list.dart';
-import '../widgets/top_rated_movie_list.dart';
-import '../widgets/upcoming_movie_list.dart';
+import 'package:movielicious/src/core/core.dart';
+import 'package:movielicious/src/features/movies/movies.dart';
+import 'package:movielicious/src/features/home/home.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: CustomScrollView(
-          slivers: [
-            const CustomSliverAppBar(),
-            _buildUpcomingMovieList(),
-            _buildGenreList(),
-            _buildPopularMovieList(),
-            _buildTopRatedMovieList(),
-          ],
+    return Scaffold(
+      appBar: const CustomAppBar(),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final height = constraints.maxHeight;
+
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                LimitedBox(
+                  maxHeight: height * 0.1,
+                  child: const HomeHeader(),
+                ),
+                const SizedBox(height: kAppWidgetMargin),
+                LimitedBox(
+                  maxHeight: height * 0.3,
+                  child: const FeaturedCarousel(),
+                ),
+                _buildPopularMovieList(),
+                _buildUpcomingMovieList(),
+                _buildTopRatedMovieList(),
+                const SizedBox(height: kAppWidgetMargin),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildPoster<B extends BaseMoviesBloc>({
+    required String title,
+    required Widget widgetList,
+  }) {
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        vertical: kAppHorizontalMargin,
+      ),
+      child: LimitedBox(
+        maxHeight: 300,
+        child: HorizontalMovieListContainer<B>(
+          title: title,
+          list: widgetList,
         ),
       ),
     );
   }
 
-  Widget _buildPoster({
-    required String title,
-    required Widget widgetList,
-  }) {
-    return SliverHorizontalContainer(
-      sectionTitle: title,
-      list: widgetList,
-    );
-  }
-
-  Widget _buildGenreList() {
-    return const SliverHorizontalContainer(
-      sectionTitle: 'Genres',
-      list: GenreBoxList(),
-      height: 85, //TODO: put this on constant variable
-    );
-  }
-
   Widget _buildUpcomingMovieList() {
-    return _buildPoster(
+    return _buildPoster<UpcomingMoviesBloc>(
       title: 'Upcoming Movies',
-      widgetList: const UpcomingMovieList(),
+      widgetList: const MovieList<UpcomingMoviesBloc>(),
     );
   }
 
   Widget _buildTopRatedMovieList() {
-    return _buildPoster(
+    return _buildPoster<TopRatedMoviesBloc>(
       title: 'Top Rated Movies',
-      widgetList: const TopRatedMovieList(),
+      widgetList: const MovieList<TopRatedMoviesBloc>(),
     );
   }
 
   Widget _buildPopularMovieList() {
-    return _buildPoster(
+    return _buildPoster<PopularMoviesBloc>(
       title: 'Popular Movies',
-      widgetList: const PopularMovieList(),
+      widgetList: const MovieList<PopularMoviesBloc>(),
     );
   }
 }
